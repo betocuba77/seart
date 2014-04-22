@@ -1,0 +1,7 @@
+Cambios de bonfire a seart (archivos que se modificaron):
+
+- application/config/autoload.php
+- application/config/config.php
+- seart/helpers/application_helper.php
+- public/index.php
+- 
