@@ -45,14 +45,11 @@
 					</div>
 
 				<?php else:
-
-
+					// 
 					$form_method = 'form_' . $field['form_detail']['type'];
-					if (is_callable($form_method))
-					{
+					if (is_callable($form_method)){
 						echo $form_method($field['form_detail']['settings'], set_value($field['name'], isset($user->$field['name']) ? $user->$field['name'] : ''), $field['label']);
 					}
-
 
 				endif;
 			endif;

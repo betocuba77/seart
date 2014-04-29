@@ -27,8 +27,7 @@
  * @link       http://cibonfire.com
  *
  */
-class Users extends Front_Controller
-{
+class Users extends Front_Controller{
 
 	//--------------------------------------------------------------------
 
@@ -37,8 +36,7 @@ class Users extends Front_Controller
 	 *
 	 * @retun void
 	 */
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->load->helper('form');
@@ -61,18 +59,14 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function login()
-	{
+	public function login(){
 		// if the user is not logged in continue to show the login page
-		if ($this->auth->is_logged_in() === FALSE)
-		{
-			if (isset($_POST['log-me-in']))
-			{
+		if ($this->auth->is_logged_in() === FALSE){
+			if (isset($_POST['log-me-in'])){
 				$remember = $this->input->post('remember_me') == '1' ? TRUE : FALSE;
 
 				// Try to login
-				if ($this->auth->login($this->input->post('login'), $this->input->post('password'), $remember) === TRUE)
-				{
+				if ($this->auth->login($this->input->post('login'), $this->input->post('password'), $remember) === TRUE){
 
 					// Log the Activity
 					log_activity($this->auth->user_id(), lang('us_log_logged') . ': ' . $this->input->ip_address(), 'users');
@@ -87,18 +81,12 @@ class Users extends Front_Controller
 						cases where we are presenting different information to different
 						roles that might cause the base destination to be not available.
 					*/
-					if ($this->settings_lib->item('auth.do_login_redirect') && !empty ($this->auth->login_destination))
-					{
+					if ($this->settings_lib->item('auth.do_login_redirect') && !empty ($this->auth->login_destination)){
 						Template::redirect($this->auth->login_destination);
-					}
-					else
-					{
-						if (!empty($this->requested_page))
-						{
+					} else {
+						if (!empty($this->requested_page)) {
 							Template::redirect($this->requested_page);
-						}
-						else
-						{
+						} else {
 							Template::redirect('/');
 						}
 					}
@@ -108,9 +96,7 @@ class Users extends Front_Controller
 			Template::set_view('users/users/login');
 			Template::set('page_title', 'Login');
 			Template::render('login');
-		}
-		else
-		{
+		} else {
 
 			Template::redirect('/');
 		}//end if
@@ -127,10 +113,8 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function logout()
-	{
-		if (isset($this->current_user->id))
-		{
+	public function logout() {
+		if (isset($this->current_user->id)) {
 			// Login session is valid.  Log the Activity
 			log_activity($this->current_user->id, lang('us_log_logged_out') . ': ' . $this->input->ip_address(), 'users');
 		}
@@ -153,23 +137,18 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function forgot_password()
-	{
+	public function forgot_password() {
 
 		// if the user is not logged in continue to show the login page
-		if ($this->auth->is_logged_in() === FALSE)
-		{
-			if (isset($_POST['send']))
-			{
+		if ($this->auth->is_logged_in() === FALSE) {
+			if (isset($_POST['send'])) {
 				$this->form_validation->set_rules('email', 'lang:bf_email', 'required|trim|valid_email');
 
-				if ($this->form_validation->run() !== FALSE)
-				{
+				if ($this->form_validation->run() !== FALSE) {
 					// We validated. Does the user actually exist?
 					$user = $this->user_model->find_by('email', $_POST['email']);
 
-					if ($user !== FALSE)
-					{
+					if ($user !== FALSE) {
 						// User exists, so create a temp password.
 						$this->load->helpers(array('string', 'security'));
 
@@ -192,17 +171,12 @@ class Users extends Front_Controller
 									'message'	=> $this->load->view('_emails/forgot_password', array('link' => $pass_link), TRUE)
 							 );
 
-						if ($this->emailer->send($data))
-						{
+						if ($this->emailer->send($data)) {
 							Template::set_message(lang('us_reset_pass_message'), 'success');
-						}
-						else
-						{
+						} else {
 							Template::set_message(lang('us_reset_pass_error'). $this->emailer->error, 'error');
 						}
-					}
-					else
-					{
+					} else {
 						Template::set_message(lang('us_invalid_email'), 'error');
 					}//end if
 				}//end if
@@ -211,10 +185,7 @@ class Users extends Front_Controller
 			Template::set_view('users/users/forgot_password');
 			Template::set('page_title', 'Password Reset');
 			Template::render();
-		}
-		else
-		{
-
+		} else{
 			Template::redirect('/');
 		}//end if
 
@@ -229,8 +200,7 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function profile()
-	{
+	public function profile(){
 		// Make sure we're logged in.
 		$this->auth->restrict();
 		$this->set_current_user();
@@ -245,22 +215,18 @@ class Users extends Front_Controller
 
 		Template::set('meta_fields', $meta_fields);
 
-		if (isset($_POST['save']))
-		{
+		if (isset($_POST['save'])) {
 
 			$user_id = $this->current_user->id;
-			if ($this->save_user($user_id, $meta_fields))
-			{
+			if ($this->save_user($user_id, $meta_fields)) {
 
 				$meta_data = array();
-				foreach ($meta_fields as $field)
-				{
+				foreach ($meta_fields as $field) {
 					if ((!isset($field['admin_only']) || $field['admin_only'] === FALSE
 						|| (isset($field['admin_only']) && $field['admin_only'] === TRUE
 							&& isset($this->current_user) && $this->current_user->role_id == 1))
 						&& (!isset($field['frontend']) || $field['frontend'] === TRUE)
-						&& $this->input->post($field['name']) !== FALSE)
-					{
+						&& $this->input->post($field['name']) !== FALSE) {
 						$meta_data[$field['name']] = $this->input->post($field['name']);
 					}
 				}
@@ -278,9 +244,7 @@ class Users extends Front_Controller
 
 				// redirect to make sure any language changes are picked up
 				Template::redirect('/users/profile');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('us_profile_updated_error'), 'error');
 			}//end if
 		}//end if
@@ -322,56 +286,45 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function reset_password($email='', $code='')
-	{
+	public function reset_password($email='', $code='') {
 		// if the user is not logged in continue to show the login page
-		if ($this->auth->is_logged_in() === FALSE)
-		{
+		if ($this->auth->is_logged_in() === FALSE) {
 			// If we're set here via Bonfire and not an email link
 			// then we might have the email and code in the session.
-			if (empty($code) && $this->session->userdata('pass_check'))
-			{
+			if (empty($code) && $this->session->userdata('pass_check')) {
 				$code = $this->session->userdata('pass_check');
 			}
 
-			if (empty($email) && $this->session->userdata('email'))
-			{
+			if (empty($email) && $this->session->userdata('email')) {
 				$email = $this->session->userdata('email');
 			}
 
 			// If there is no code, then it's not a valid request.
-			if (empty($code) || empty($email))
-			{
+			if (empty($code) || empty($email)) {
 				Template::set_message(lang('us_reset_invalid_email'), 'error');
 				Template::redirect(LOGIN_URL);
 			}
 
 			// Handle the form
-			if (isset($_POST['set_password']))
-			{
+			if (isset($_POST['set_password'])) {
 				$this->form_validation->set_rules('password', 'lang:bf_password', 'required|max_length[120]|valid_password');
 				$this->form_validation->set_rules('pass_confirm', 'lang:bf_password_confirm', 'required|matches[password]');
 
-				if ($this->form_validation->run() !== FALSE)
-				{
+				if ($this->form_validation->run() !== FALSE) {
 					// The user model will create the password hash for us.
 					$data = array('password' => $this->input->post('password'),
 					              'reset_by'	=> 0,
 					              'reset_hash'	=> '',
 					              'force_password_reset' => 0);
 
-					if ($this->user_model->update($this->input->post('user_id'), $data))
-					{
+					if ($this->user_model->update($this->input->post('user_id'), $data)) {
 						// Log the Activity
 						log_activity($this->input->post('user_id'), lang('us_log_reset') , 'users');
 
 						Template::set_message(lang('us_reset_password_success'), 'success');
 						Template::redirect(LOGIN_URL);
-					}
-					else
-					{
+					} else {
 						Template::set_message(sprintf(lang('us_reset_password_error'), $this->user_model->error), 'error');
-
 					}
 				}
 			}//end if
@@ -385,8 +338,7 @@ class Users extends Front_Controller
                                    ));
 
 			// It will be an Object if a single result was returned.
-			if (!is_object($user))
-			{
+			if (!is_object($user)) {
 				Template::set_message( lang('us_reset_invalid_email'), 'error');
 				Template::redirect(LOGIN_URL);
 			}
@@ -402,10 +354,7 @@ class Users extends Front_Controller
 
 			Template::set_view('users/users/reset_password');
 			Template::render();
-		}
-		else
-		{
-
+		} else{
 			Template::redirect('/');
 		}//end if
 
@@ -420,11 +369,9 @@ class Users extends Front_Controller
 	 *
 	 * @return void
 	 */
-	public function register()
-	{
+	public function register(){
 		// Are users even allowed to register?
-		if (!$this->settings_lib->item('auth.allow_register'))
-		{
+		if (!$this->settings_lib->item('auth.allow_register')) {
 			Template::set_message(lang('us_register_disabled'), 'error');
 			Template::redirect('/');
 		}
@@ -439,15 +386,13 @@ class Users extends Front_Controller
 		$meta_fields = config_item('user_meta_fields');
 		Template::set('meta_fields', $meta_fields);
 
-		if (isset($_POST['register']))
-		{
+		if (isset($_POST['register'])){
 			// Validate input
 			$this->form_validation->set_rules('email', 'lang:bf_email', 'required|trim|valid_email|max_length[120]|unique[users.email]');
 
 			$username_required = '';
 			if ($this->settings_lib->item('auth.login_type') == 'username' ||
-			    $this->settings_lib->item('auth.use_usernames'))
-			{
+			    $this->settings_lib->item('auth.use_usernames')) {
 				$username_required = 'required|';
 			}
 			$this->form_validation->set_rules('username', 'lang:bf_username', $username_required . 'trim|max_length[30]|unique[users.username]');
@@ -461,21 +406,18 @@ class Users extends Front_Controller
 
 
 			$meta_data = array();
-			foreach ($meta_fields as $field)
-			{
+			foreach ($meta_fields as $field) {
 				if ((!isset($field['admin_only']) || $field['admin_only'] === FALSE
 					|| (isset($field['admin_only']) && $field['admin_only'] === TRUE
 						&& isset($this->current_user) && $this->current_user->role_id == 1))
-					&& (!isset($field['frontend']) || $field['frontend'] === TRUE))
-				{
+					&& (!isset($field['frontend']) || $field['frontend'] === TRUE)) {
 					$this->form_validation->set_rules($field['name'], $field['label'], $field['rules']);
 
 					$meta_data[$field['name']] = $this->input->post($field['name']);
 				}
 			}
 
-			if ($this->form_validation->run() !== FALSE)
-			{
+			if ($this->form_validation->run() !== FALSE) {
 				// Time to save the user...
 				$data = array(
 						'email'			=> $this->input->post('email'),
@@ -485,8 +427,7 @@ class Users extends Front_Controller
 						'display_name'	=> $this->input->post('display_name'),
 					);
 
-				if (isset($_POST['username']))
-				{
+				if (isset($_POST['username'])) {
 					$data['username'] = $this->input->post('username');
 				}
 
@@ -494,14 +435,12 @@ class Users extends Front_Controller
 				$activation_method = $this->settings_lib->item('auth.user_activation_method');
 
 				// No activation method
-				if ($activation_method == 0)
-				{
+				if ($activation_method == 0) {
 					// Activate the user automatically
 					$data['active'] = 1;
 				}
 
-				if ($user_id = $this->user_model->insert($data))
-				{
+				if ($user_id = $this->user_model->insert($data)) {
 					// now add the meta is there is meta data
 					$this->user_model->save_meta_for($user_id, $meta_data);
 
@@ -517,8 +456,7 @@ class Users extends Front_Controller
 					$site_title = $this->settings_lib->item('site.title');
 					$error = false;
 
-					switch ($activation_method)
-					{
+					switch ($activation_method) {
 						case 0:
 							// No activation required. Activate the user and send confirmation email
 							$subject 		=  str_replace('[SITE_TITLE]',$this->settings_lib->item('site.title'),lang('us_account_reg_complete'));
@@ -558,18 +496,14 @@ class Users extends Front_Controller
 						'message'	=> $email_mess
 					);
 
-					if (!$this->emailer->send($data))
-					{
+					if (!$this->emailer->send($data)) {
 						$message .= lang('us_err_no_email'). $this->emailer->error;
 						$error    = true;
 					}
 
-					if ($error)
-					{
+					if ($error) {
 						$type = 'error';
-					}
-					else
-					{
+					} else {
 						$type = 'success';
 					}
 
@@ -579,9 +513,7 @@ class Users extends Front_Controller
 
 					log_activity($user_id, lang('us_log_register'), 'users');
 					Template::redirect(LOGIN_URL);
-				}
-				else
-				{
+				} else {
 					Template::set_message(lang('us_registration_fail'), 'error');
 					redirect(REGISTER_URL);
 				}//end if
@@ -618,19 +550,16 @@ class Users extends Front_Controller
 	 *
 	 * @return bool
 	 */
-	private function save_user($id=0, $meta_fields=array())
-	{
+	private function save_user($id=0, $meta_fields=array()){
 
-		if ( $id == 0 )
-		{
+		if ( $id == 0 ){
 			$id = $this->current_user->id; /* ( $this->input->post('id') > 0 ) ? $this->input->post('id') :  */
 		}
 
 		$_POST['id'] = $id;
 
 		// Simple check to make the posted id is equal to the current user's id, minor security check
-		if ( $_POST['id'] != $this->current_user->id )
-		{
+		if ( $_POST['id'] != $this->current_user->id ){
 			$this->form_validation->set_message('email', 'lang:us_invalid_userid');
 			return FALSE;
 		}
@@ -649,8 +578,7 @@ class Users extends Front_Controller
 
 		$username_required = '';
 		if ($this->settings_lib->item('auth.login_type') == 'username' ||
-		    $this->settings_lib->item('auth.use_usernames'))
-		{
+		    $this->settings_lib->item('auth.use_usernames')){
 			$username_required = 'required|';
 		}
 		$this->form_validation->set_rules('username', 'lang:bf_username', $username_required . 'trim|max_length[30]|unique[users.username,users.id]');
@@ -663,20 +591,17 @@ class Users extends Front_Controller
 		Events::trigger('before_user_validation', $payload );
 
 
-		foreach ($meta_fields as $field)
-		{
+		foreach ($meta_fields as $field) {
 			if ((!isset($field['admin_only']) || $field['admin_only'] === FALSE
 				|| (isset($field['admin_only']) && $field['admin_only'] === TRUE
 					&& isset($this->current_user) && $this->current_user->role_id == 1))
-				&& (!isset($field['frontend']) || $field['frontend'] === TRUE))
-			{
+				&& (!isset($field['frontend']) || $field['frontend'] === TRUE)) {
 				$this->form_validation->set_rules($field['name'], $field['label'], $field['rules']);
 			}
 		}
 
 
-		if ($this->form_validation->run() === FALSE)
-		{
+		if ($this->form_validation->run() === FALSE) {
 			return FALSE;
 		}
 
@@ -688,18 +613,15 @@ class Users extends Front_Controller
 		);
 
 		// If empty, the password will be left unchanged.
-		if ($this->input->post('password') !== '')
-		{
+		if ($this->input->post('password') !== '') {
 			$data['password'] = $this->input->post('password');
 		}
 
-		if ($this->input->post('display_name') !== '')
-		{
+		if ($this->input->post('display_name') !== '') {
 			$data['display_name'] = $this->input->post('display_name');
 		}
 
-		if (isset($_POST['username']))
-		{
+		if (isset($_POST['username'])) {
 			$data['username'] = $this->input->post('username');
 		}
 
@@ -723,18 +645,14 @@ class Users extends Front_Controller
 			account. If the code fails, an error is generated and returned.
 
 		*/
-		public function activate($user_id = NULL)
-		{
-			if (isset($_POST['activate']))
-			{
+		public function activate($user_id = NULL) {
+			if (isset($_POST['activate'])) {
 				$this->form_validation->set_rules('code', 'Verification Code', 'required|trim');
-				if ($this->form_validation->run() == TRUE)
-				{
+				if ($this->form_validation->run() == TRUE) {
 					$code = $this->input->post('code');
 
 					$activated = $this->user_model->activate($user_id, $code);
-					if ($activated)
-					{
+					if ($activated) {
 						$user_id = $activated;
 
 						// Now send the email
@@ -753,18 +671,13 @@ class Users extends Front_Controller
 							'message'	=> $this->load->view('_emails/activated', $email_message_data, TRUE)
 						);
 
-						if ($this->emailer->send($data))
-						{
+						if ($this->emailer->send($data)) {
 							Template::set_message(lang('us_account_active'), 'success');
-						}
-						else
-						{
+						} else {
 							Template::set_message(lang('us_err_no_email'). $this->emailer->error, 'error');
 						}
 						Template::redirect('/');
-					}
-					else
-					{
+					} else {
 						Template::set_message($this->user_model->error.'. '. lang('us_err_activate_code'), 'error');
 					}
 				}
@@ -782,19 +695,15 @@ class Users extends Front_Controller
 			   Allows a user to request that their activation code be resent to their
 			   account's email address. If a matching email is found, the code is resent.
 		   */
-		public function resend_activation()
-		{
-			if (isset($_POST['send']))
-			{
+		public function resend_activation() {
+			if (isset($_POST['send'])) {
 				$this->form_validation->set_rules('email', 'lang:bf_email', 'required|trim|valid_email');
 
-				if ($this->form_validation->run())
-				{
+				if ($this->form_validation->run()) {
 					// We validated. Does the user actually exist?
 					$user = $this->user_model->find_by('email', $_POST['email']);
 
-					if ($user !== FALSE)
-					{
+					if ($user !== FALSE) {
 						// User exists, so create a temp password.
 						$this->load->helpers(array('string', 'security'));
 
@@ -826,17 +735,12 @@ class Users extends Front_Controller
 							'message'	=> $this->load->view('_emails/activate', $email_message_data, TRUE)
 						);
 						$this->emailer->enable_debug(true);
-						if ($this->emailer->send($data))
-						{
+						if ($this->emailer->send($data)) {
 							Template::set_message(lang('us_check_activate_email'), 'success');
-						}
-						else
-						{
+						} else {
 							Template::set_message(lang('us_err_no_email').$this->emailer->error.", ".$this->emailer->debug_message, 'error');
 						}
-					}
-					else
-					{
+					} else {
 						Template::set_message('Cannot find that email in our records.', 'error');
 					}
 				}

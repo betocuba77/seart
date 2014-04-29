@@ -202,7 +202,7 @@ class Settings extends Admin_Controller{
         $settings = $this->settings_lib->find_all();
         if ($settings['auth.password_show_labels'] == 1) {
             Assets::add_module_js('users','password_strength.js');
-            Assets::add_module_js('users','jquery.strength.js');
+            Assets::add_module_js('users','jquery.strength.js');           
             Assets::add_js($this->load->view('users_js', array('settings'=>$settings), true), 'inline');
         }
         $this->load->model('carreras/carreras_model');

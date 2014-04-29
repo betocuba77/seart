@@ -69,25 +69,5 @@ $config['user_meta_fields'] =  array(
 		),
 	),
 
-	array(
-		'name'   => 'type',
-		'label'   => lang('user_meta_type'),
-		'rules'   => 'required',
-		'frontend' => FALSE,
-		'admin_only' => TRUE,
-		'form_detail' => array(
-			'type' => 'dropdown',
-			'settings' => array(
-				'name'		=> 'type',
-				'id'		=> 'type',
-				'class'		=> 'span6',
-			),
-			'options' =>  array(
-                  'small'  => 'Small Shirt',
-                  'med'    => 'Medium Shirt',
-                  'large'   => 'Large Shirt',
-                  'xlarge' => 'Extra Large Shirt',
-                ),
-		),
-	),
+	
 );

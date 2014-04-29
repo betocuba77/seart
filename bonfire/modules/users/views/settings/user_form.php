@@ -1,15 +1,12 @@
 <script>
-    function show_field() {     
-
+    function show_field() {    
         elem = document.getElementById('role_id');        
         tutor = document.getElementById('ftutor');
-        autoridad = document.getElementById('fautoridad');
-        
+        autoridad = document.getElementById('fautoridad');        
         if (elem.value == 7){
              tutor.style.display = 'block';
              autoridad.style.display = 'none';        
-        }
-            
+        }            
         if (elem.value == 8){
              autoridad.style.display = 'block';        
              tutor.style.display = 'none';            

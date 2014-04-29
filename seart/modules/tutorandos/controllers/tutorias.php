@@ -13,8 +13,7 @@ class tutorias extends Admin_Controller{
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->auth->restrict('Tutorandos.Tutorias.View');
@@ -135,12 +134,16 @@ class tutorias extends Admin_Controller{
 			}
 		}
 		Assets::add_module_js('tutorandos', 'tutorandos.js');
-		$this->load->model('carreras/carreras_model');
-		$carreras = $this->carreras_model->find_all();
-		foreach ($carreras as $value) {
-			$arreglo[$value->carrera_id] = $value->nombre.' Plan:'.$value->plan;
+		$this->load->model('carreras/carreras_model');		
+		
+		foreach ($this->carreras_model->find_all() as $value) {
+			$carreras[$value->carrera_id] = $value->nombre;
 		}		
-		Template::set('carreras', $arreglo );
+		foreach ($this->carreras_model->find_all_planes() as $value) {
+			$planes[$value->plan_id] = $value->anio_plan.' ±±'.$value->version;
+		}
+		Template::set('carreras', $carreras );
+		Template::set('planes', $planes);
 		Template::set('provincias', $this->tutorandos_model->find_all_by_tabla('provincias'));
 		Template::set('localidades', $this->tutorandos_model->find_all_by_tabla('localidades'));
 		Template::set('departamentos', $this->tutorandos_model->find_all_by_tabla('departamentos'));

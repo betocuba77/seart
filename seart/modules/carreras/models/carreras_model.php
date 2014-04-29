@@ -64,4 +64,13 @@ class Carreras_model extends BF_Model {
 		}
 		return $arreglo;
 	}
+
+	public function find_all_planes(){
+		$query = $this->db->from('planes_de_estudio')->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return FALSE;
+		}
+	}
 }

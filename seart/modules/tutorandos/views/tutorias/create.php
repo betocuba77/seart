@@ -108,7 +108,8 @@ $id = isset($tutorandos['tutorando_id']) ? $tutorandos['tutorando_id'] : '';
 		<fieldset>
 			<legend>Datos Acad&eacute;micos - Nivel Universitario</legend>
 			<?php // Change the values in this array to populate your dropdown as required			
-				echo form_dropdown('tutorandos_carrera', $carreras, set_value('tutorandos_carrera', isset($tutorandos['carrera']) ? $tutorandos['carrera'] : ''), 'Carrera'. lang('bf_form_label_required'));
+				echo form_dropdown('carrera', $carreras, set_value('carrera', isset($tutorandos['carrera']) ? $tutorandos['carrera'] : ''), 'Carrera'. lang('bf_form_label_required'));
+				echo form_dropdown('plan', $planes, set_value('plan', isset($tutorandos['plan']) ? $tutorandos['plan'] : ''), 'Plan'. lang('bf_form_label_required'));
 			?>
 
 			<div class="control-group <?php echo form_error('lu') ? 'error' : ''; ?>">
