@@ -94,8 +94,8 @@ echo form_open($this->uri->uri_string(), 'class="form-horizontal" autocomplete="
         </div>
         <fieldset id="ftutor" style="display:block">
             <?php                 
-                echo form_dropdown('carrera', $carreras, set_value('carrera', isset($user['carrera']) ? $user['carrera'] : ''), 'Carrera');
-                echo form_dropdown('equipo_trabajo', $equipos, set_value('equipo_trabajo', isset($user['equipo_trabajo']) ? $user['equipo_trabajo'] : ''), 'Equipo de Trabajo');
+                echo form_dropdown('carrera', $carreras, set_value('carrera', isset($user->carrera) ? $user->carrera : ''), 'Carrera');
+                echo form_dropdown('equipo_trabajo', $equipos, set_value('equipo_trabajo', isset($user->equipo_trabajo) ? $user->equipo_trabajo : ''), 'Equipo de Trabajo');
             ?>
         </fieldset>
         <fieldset id="fautoridad" style="display:none">

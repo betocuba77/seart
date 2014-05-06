@@ -269,6 +269,10 @@ class Settings extends Admin_Controller{
 		}
 
 		if (isset($user)){
+			$this->load->model('carreras/carreras_model');
+        	$this->load->model('equipos_de_trabajo/equipos_de_trabajo_model');
+        	Template::set('carreras', $this->carreras_model->find_all_asociativo());
+        	Template::set('equipos', $this->equipos_de_trabajo_model->find_all_asociativo());
 			Template::set('roles', $this->role_model->select('role_id, role_name, default')->where('deleted', 0)->find_all());
 			Template::set('user', $user);
 			Template::set('languages', unserialize($this->settings_lib->item('site.languages')));

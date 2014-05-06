@@ -21,13 +21,7 @@ $id = isset($carreras['carrera_id']) ? $carreras['carrera_id'] : '';
 				</div>
 			</div>
 
-			<?php // Change the values in this array to populate your dropdown as required
-				$planes = array(
-					2007 => '2007',
-					2008 => '2008',
-					2010 => '2010',
-					2013 => '2013',
-				);
+			<?php // Change the values in this array to populate your dropdown as required				
 				echo form_dropdown('plan', $planes, set_value('plan', isset($carreras['plan']) ? $carreras['plan'] : ''), 'Plan de Estudio');				
 			?>
 

@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Migration_Install_tutores_permissions extends Migration
+class Migration_Install_preguntas_permissions extends Migration
 {
 
 	/**
@@ -10,22 +10,22 @@ class Migration_Install_tutores_permissions extends Migration
 	 */
 	private $permission_values = array(
 		array(
-			'name' => 'Tutores.Tutorias.View',
+			'name' => 'Preguntas.Gestion.View',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Create',
+			'name' => 'Preguntas.Gestion.Create',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Edit',
+			'name' => 'Preguntas.Gestion.Edit',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Delete',
+			'name' => 'Preguntas.Gestion.Delete',
 			'description' => '',
 			'status' => 'active',
 		),

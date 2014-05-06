@@ -1,16 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Carreras_model extends BF_Model {
+class Preguntas_model extends BF_Model {
 
-	protected $table_name	= "carreras";
-	protected $key			= "carrera_id";
+	protected $table_name	= "preguntas";
+	protected $key			= "pregunta_id";
 	protected $soft_deletes	= false;
 	protected $date_format	= "datetime";
 
 	protected $log_user 	= FALSE;
 
-	protected $set_created	= false;
-	protected $set_modified = false;
+	protected $set_created	= true;
+	protected $set_modified = true;
+	protected $created_field = "created_on";
+	protected $modified_field = "modified_on";
 
 	/*
 		Customize the operations of the model without recreating the insert, update,
@@ -45,40 +47,22 @@ class Carreras_model extends BF_Model {
 		That way it is only required during inserts, not updates which may only
 		be updating a portion of the data.
 	 */
-	protected $validation_rules = array(
+	protected $validation_rules 		= array(
 		array(
-			"field"		=> "nombre",
-			"label"		=> "Nombre",
-			"rules"		=> "required|max_length[60]"
-		)
+			"field"		=> "preguntas_descripcion",
+			"label"		=> "Descripcion",
+			"rules"		=> "required"
+		),
+		array(
+			"field"		=> "preguntas_factor",
+			"label"		=> "Factor",
+			"rules"		=> "max_length[1]"
+		),
 	);
 	protected $insert_validation_rules 	= array();
 	protected $skip_validation 			= FALSE;
 
 	//--------------------------------------------------------------------
-
-	public function find_all(){
-		$this->db->from('plan_carrera');
-		$this->db->join('carreras', 'carreras.carrera_id = plan_carrera.carrera_id', 'left');
-		$query = $this->db->join('planes_de_estudio','planes_de_estudio.plan_id = plan_carrera.plan_id', 'left')->get();
-		return $query->result();
-	}
-
-	public function find_all_asociativo(){
-		$query = $this->db->get($this->table_name);
-		foreach ($query->result() as $value) {
-			$arreglo[$value->carrera_id] = $value->nombre; 
-		}
-		return $arreglo;
-	}
-
-	public function find_all_planes(){
-		$query = $this->db->from('planes_de_estudio')->get();
-		if ($query->num_rows() > 0) {
-			return $query->result();
-		} else {
-			return FALSE;
-		}
-	}
+	
 
 }

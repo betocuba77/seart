@@ -48,7 +48,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				<?php else : ?>
 					<td><?php e($record->nombre); ?></td>
 				<?php endif; ?>
-					<td><?php e($record->plan) ?></td>
+					<td><?php e($record->anio_plan.' '.$record->version) ?></td>
 					<td><?php switch ($record->facultad) {
 						case '0': echo 'Facultad de Ingenier&iacute;a'; break;
 						case '0': echo 'Facultad de Ingenier&iacute;a'; break;

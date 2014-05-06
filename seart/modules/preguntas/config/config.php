@@ -2,7 +2,7 @@
 
 $config['module_config'] = array(
 	'description'	=> 'Una lista de todos los ítems',
-	'name'		=> 'Tutores',
+	'name'		=> 'Preguntas',
 	'version'		=> '0.0.1',
 	'author'		=> 'administrador'
 );

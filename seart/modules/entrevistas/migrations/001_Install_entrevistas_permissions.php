@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Migration_Install_tutores_permissions extends Migration
+class Migration_Install_entrevistas_permissions extends Migration
 {
 
 	/**
@@ -10,22 +10,42 @@ class Migration_Install_tutores_permissions extends Migration
 	 */
 	private $permission_values = array(
 		array(
-			'name' => 'Tutores.Tutorias.View',
+			'name' => 'Entrevistas.Analisis.View',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Create',
+			'name' => 'Entrevistas.Analisis.Create',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Edit',
+			'name' => 'Entrevistas.Analisis.Edit',
 			'description' => '',
 			'status' => 'active',
 		),
 		array(
-			'name' => 'Tutores.Tutorias.Delete',
+			'name' => 'Entrevistas.Analisis.Delete',
+			'description' => '',
+			'status' => 'active',
+		),
+		array(
+			'name' => 'Entrevistas.Gestion.View',
+			'description' => '',
+			'status' => 'active',
+		),
+		array(
+			'name' => 'Entrevistas.Gestion.Create',
+			'description' => '',
+			'status' => 'active',
+		),
+		array(
+			'name' => 'Entrevistas.Gestion.Edit',
+			'description' => '',
+			'status' => 'active',
+		),
+		array(
+			'name' => 'Entrevistas.Gestion.Delete',
 			'description' => '',
 			'status' => 'active',
 		),

@@ -1,9 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Carreras_model extends BF_Model {
+class Entrevistas_model extends BF_Model {
 
-	protected $table_name	= "carreras";
-	protected $key			= "carrera_id";
+	protected $table_name	= "entrevistas";
+	protected $key			= "entrevista_id";
 	protected $soft_deletes	= false;
 	protected $date_format	= "datetime";
 
@@ -45,40 +45,27 @@ class Carreras_model extends BF_Model {
 		That way it is only required during inserts, not updates which may only
 		be updating a portion of the data.
 	 */
-	protected $validation_rules = array(
+	protected $validation_rules 		= array(
 		array(
-			"field"		=> "nombre",
-			"label"		=> "Nombre",
-			"rules"		=> "required|max_length[60]"
-		)
+			"field"		=> "entrevistas_entrevistador",
+			"label"		=> "Entrevistador",
+			"rules"		=> "max_length[20]"
+		),
+		array(
+			"field"		=> "entrevistas_entrevistado",
+			"label"		=> "Entrevistado",
+			"rules"		=> "max_length[11]"
+		),
+		array(
+			"field"		=> "entrevistas_fecha",
+			"label"		=> "Fecha",
+			"rules"		=> "required"
+		),
 	);
 	protected $insert_validation_rules 	= array();
 	protected $skip_validation 			= FALSE;
 
 	//--------------------------------------------------------------------
-
-	public function find_all(){
-		$this->db->from('plan_carrera');
-		$this->db->join('carreras', 'carreras.carrera_id = plan_carrera.carrera_id', 'left');
-		$query = $this->db->join('planes_de_estudio','planes_de_estudio.plan_id = plan_carrera.plan_id', 'left')->get();
-		return $query->result();
-	}
-
-	public function find_all_asociativo(){
-		$query = $this->db->get($this->table_name);
-		foreach ($query->result() as $value) {
-			$arreglo[$value->carrera_id] = $value->nombre; 
-		}
-		return $arreglo;
-	}
-
-	public function find_all_planes(){
-		$query = $this->db->from('planes_de_estudio')->get();
-		if ($query->num_rows() > 0) {
-			return $query->result();
-		} else {
-			return FALSE;
-		}
-	}
+	
 
 }

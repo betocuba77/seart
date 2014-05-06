@@ -53,8 +53,7 @@ class gestion extends Admin_Controller{
 			}
 		}
 
-		$records = $this->carreras_model->find_all();
-
+		$records = $this->carreras_model->find_all();		
 		Template::set('records', $records);
 		Template::set('toolbar_title', 'Gesti&oacute;n de Carreras');
 		Template::render();
@@ -82,8 +81,11 @@ class gestion extends Admin_Controller{
 				Template::set_message(lang('carreras_create_failure') . $this->carreras_model->error, 'error');
 			}
 		}
+		foreach ($this->carreras_model->find_all_planes() as  $value) {
+			$planes[$value->plan_id] = $value->anio_plan.' '.$value->version; 
+		}
 		Assets::add_module_js('carreras', 'carreras.js');
-
+		Template::set('planes', $planes );
 		Template::set('toolbar_title', lang('carreras_create') . ' Carrera');
 		Template::render();
 	}
