@@ -48,7 +48,7 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<input class="btn btn-large btn-primary" type="submit" name="log-me-in" id="submit" value="<?php e(lang('us_let_me_in')); ?>" tabindex="5" />
+				<input class="btn btn-inverse btn-block" type="submit" name="log-me-in" id="submit" align="justify" value="<?php e(lang('us_let_me_in')); ?>" tabindex="5" />
 			</div>
 		</div>
 	<?php echo form_close(); ?>

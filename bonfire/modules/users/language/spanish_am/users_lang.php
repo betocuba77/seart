@@ -89,12 +89,13 @@ $lang['us_edit_note']				= 'Ingrese sus detalles acontinuación y luego haga cli
 $lang['us_reset_password']			= 'Restablecer su contraseña';
 $lang['us_reset_note']				= 'Ingrese su correo electrónico y le enviaremos una contraseña temporal.';
 
-$lang['us_login']					= 'Mi nombre es...';
-$lang['us_remember_note']			= 'Recordarme por 2 semanas';
+$lang['us_login']					= 'Acceso de Usuario';
+$lang['us_remember_note']			= 'Recordarme';
 $lang['us_no_account']				= '¿No tienes una cuenta?';
 $lang['us_sign_up']					= 'Registrate hoy';
 $lang['us_forgot_your_password']	= '¿Olvidaste tu contraseña?';
 $lang['us_button_enter']			= 'Ingresar';
+$lang['us_let_me_in']				= 'Iniciar sesión';
 
 $lang['us_password_mins']			= 'Mínimo 8 caracteres.';
 $lang['us_register']				= 'Registrar';

@@ -4,7 +4,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p>Powered by <a href="http://cibonfire.com" target="_blank">Bonfire <?php echo BONFIRE_VERSION ?></a></p>
+        <p>Desarrollado por <a href="http://cibonfire.com" target="_blank">Alumnos Tutores <?php echo BONFIRE_VERSION ?></a></p>
     </div>
 </footer>
 <?php endif; ?>

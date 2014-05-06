@@ -1,8 +1,8 @@
 	<footer class="container-fluid footer">
 		<p class="pull-right">
-			Executed in {elapsed_time} seconds, using {memory_usage}.
+			Ejecutado en {elapsed_time} segundos, usando {memory_usage}.
 			<br/>
-			Powered by <a href="http://sitemadetutorias.com.ar" target="_blank"><i class="icon-fire">&nbsp;</i>&nbsp;Tutorias</a> <?php echo BONFIRE_VERSION ?>
+			Desarrollado por <a href="http://sitemadetutorias.com.ar" target="_blank"><i class="icon-fire">&nbsp;</i>&nbsp;Alumnos Tutores </a> <?php echo BONFIRE_VERSION ?>
 		</p>
 	</footer>
 
