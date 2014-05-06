@@ -1,17 +1,13 @@
+<script type="text/javascript">
+	var nextinput = 0;
+	function AgregarCampos(){
+		nextinput++;
+		campo = '<li id="rut'+nextinput+'"><div class="control-label">Opcion de respuesta ' + nextinput +'</div><div class="controls"><input type="text" size="20" id="opcion' + nextinput + '"  name="campo[' + nextinput + ']"  /></div></li><br>';
+		$("#campos").append(campo);
+	}
+</script>
+
 <?php
-
-$validation_errors = validation_errors();
-
-if ($validation_errors) :
-?>
-<div class="alert alert-block alert-error fade in">
-	<a class="close" data-dismiss="alert">&times;</a>
-	<h4 class="alert-heading">Please fix the following errors:</h4>
-	<?php echo $validation_errors; ?>
-</div>
-<?php
-endif;
-
 if (isset($preguntas)){
 	$preguntas = (array) $preguntas;
 }
@@ -39,17 +35,17 @@ $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
 				$respuesta = array( 1 => 'Opcion única', 2 => 'Opcion múltiple');
 				echo form_dropdown('tipo_respuesta', $respuesta, set_value('tipo_respuesta', isset($preguntas['tipo_respuesta']) ? $preguntas['tipo_respuesta'] : ''), 'Tipo de respuesta');
 			?>
-			<?php // Change the values in this array to populate your dropdown as required
-				$js = 'onChanges = "prueba()"';
-				$opciones = array( 2 => 2, 3 => 3, 4 => 4, 5 => 5);
-				echo form_dropdown('cant_opciones', $opciones, set_value('cant_opciones', isset($preguntas['cant_opciones']) ? $preguntas['cant_opciones'] : ''), 'Cantidad de opciones como respuesta', $js);
-			?>
+			<div class="control-group">
+				<div class="controls">
+					<input type="button" onclick="AgregarCampos();" value="Agregar opcion de respuesta." class="btn">			
+				</div>				
+			</div>
+			<div id="campos"  class="control-group">
+				<div class="controls" ></div>
+			</div>
+				
 		</fieldset>
-		<fieldset>
-			<?php 
-				echo form_input('name', ''); 
-				echo form_input('name', ''); 
-			?>
+		<fieldset>			
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('preguntas_action_create'); ?>"  />
 				<?php echo lang('bf_or'); ?>

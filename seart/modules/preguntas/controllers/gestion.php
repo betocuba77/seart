@@ -154,13 +154,16 @@ class gestion extends Admin_Controller{
 		}
 
 		// make sure we only pass in the fields we want
-		
+		//echo '<pre>'; print_r($this->input->post()); echo '</pre>'; exit;
+
 		$data = array();
 		$data['descripcion']        = $this->input->post('preguntas_descripcion');
 		$data['factor']        = $this->input->post('preguntas_factor');
-
+		$data['tipo_respuesta'] = $this->input->post('tipo_respuesta');
+		$respuestas = $this->input->post('campo');
+		
 		if ($type == 'insert') {
-			$id = $this->preguntas_model->insert($data);
+			$id = $this->preguntas_model->insert($data, $respuestas);
 
 			if (is_numeric($id)) {
 				$return = $id;
