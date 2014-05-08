@@ -121,12 +121,12 @@ class Tutorandos_model extends BF_Model {
 		array(
 			"field"		=> "tutorandos_carrera",
 			"label"		=> "Carrera",
-			"rules"		=> "required|max_length[11]"
+			"rules"		=> "max_length[11]"
 		),
 		array(
 			"field"		=> "tutorandos_lu",
 			"label"		=> "LU",
-			"rules"		=> "required|max_length[10]"
+			"rules"		=> "max_length[10]"
 		),
 		array(
 			"field"		=> "tutorandos_anio_ingreso",

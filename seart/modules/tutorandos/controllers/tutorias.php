@@ -243,12 +243,14 @@ class tutorias extends Admin_Controller{
 		//$data['telefono_fijo']        = $this->input->post('tutorandos_telefono_fijo');
 		//$data['telefono_movil']        = $this->input->post('tutorandos_telefono_movil');
 		$data['email']        = $this->input->post('tutorandos_email');
-		$data['domicilio']        = $this->input->post('tutorandos_domicilio');
-		$data['barrio']        = $this->input->post('tutorandos_barrio');
-		$data['localidad']        = $this->input->post('tutorandos_localidad');
-		$data['departamento']        = $this->input->post('tutorandos_departamento');
-		$data['provincia']        = $this->input->post('tutorandos_provincia');
-		$data['pais']        = $this->input->post('tutorandos_pais');
+
+		$data1['domicilio']        = $this->input->post('nombre');
+		$data1['barrio']        = $this->input->post('barrio');
+		$data1['localidad']        = $this->input->post('localidad');
+		$data1['departamento']        = $this->input->post('departamento');
+		$data1['provincia']        = $this->input->post('provincia');
+		$data1['pais']        = $this->input->post('pais');
+
 		$data['carrera']        = $this->input->post('tutorandos_carrera');
 		$data['lu']        = $this->input->post('tutorandos_lu');
 		$data['anio_ingreso']        = $this->input->post('tutorandos_anio_ingreso');
@@ -258,7 +260,7 @@ class tutorias extends Admin_Controller{
 
 		if ($type == 'insert')
 		{
-			$id = $this->tutorandos_model->insert($data);
+			$id = $this->tutorandos_model->insert($data, $data1);
 
 			if (is_numeric($id))
 			{
@@ -271,7 +273,7 @@ class tutorias extends Admin_Controller{
 		}
 		elseif ($type == 'update')
 		{
-			$return = $this->tutorandos_model->update($id, $data);
+			$return = $this->tutorandos_model->update($id, $data, $data1);
 		}
 
 		return $return;

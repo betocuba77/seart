@@ -96,6 +96,7 @@ $lang['us_sign_up']					= 'Registrate hoy';
 $lang['us_forgot_your_password']	= '¿Olvidaste tu contraseña?';
 $lang['us_button_enter']			= 'Ingresar';
 $lang['us_let_me_in']				= 'Iniciar sesión';
+$lang['us_back_to']					= 'Volver a ';
 
 $lang['us_password_mins']			= 'Mínimo 8 caracteres.';
 $lang['us_register']				= 'Registrar';

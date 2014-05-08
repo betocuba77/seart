@@ -1,9 +1,10 @@
 <?php
 	$site_open = $this->settings_lib->item('auth.allow_register');
 ?>
-<p><br/><a href="<?php echo site_url(); ?>">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>
+<p><br/><a href="http://seart.co/">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>
 
 <div id="login">
+	<center><h2><?php echo "SEART"; ?></h2></center>
 	<h2><?php echo lang('us_login'); ?></h2>
 
 	<?php echo Template::message(); ?>
@@ -48,7 +49,7 @@
 
 		<div class="control-group">
 			<div class="controls">
-				<input class="btn btn-inverse btn-block" type="submit" name="log-me-in" id="submit" align="justify" value="<?php e(lang('us_let_me_in')); ?>" tabindex="5" />
+				<center><input class="btn btn-primary" type="submit" name="log-me-in" id="submit" align="justify" value="<?php e(lang('us_let_me_in')); ?>" tabindex="5" /></center>
 			</div>
 		</div>
 	<?php echo form_close(); ?>

@@ -15,11 +15,11 @@
     </head>
     <body>
         <div id="intro" class="well"><br>
-            <img src="http://seart.co/public/index.php/../assets/images/logo_tutorias.png"><br><br>
+            <center><img src="http://seart.co/public/index.php/../assets/images/logo_tutorias.png" style="margin: -23px 0px 23px 0px"></center><br>
             <h1>Bienvenido a SEART - UNJu</h1>
-            <h2><center>Sistema Experto enfocado al Análisis de Riesgos en Tutorías.</center></h2>
+            <h2><center>Sistema Experto para al Análisis de Riesgos en Tutorías.</center></h2>
             <div class="continue">
-                <a class="btn btn-primary" href="<?= $install_url ?>"><i class= "icon-user icon-white"></i> Ingrese aquí &raquo;</a>
+                <a class="btn btn-primary" href="http://seart.co/public/index.php/login"><i class= "icon-user icon-white"></i> Ingrese aquí &raquo;</a>
             </div>
         </div>
 
