@@ -1,7 +1,4 @@
-<h1>This Page Intentionally Left Blank</h1>
 
-<p>As of Bonfire <?php echo BONFIRE_VERSION ?>, this page has no default content.</p>
-
-<p>This is your playground.</p>
-
-<p>Make it home.</p>
+<div id="intro" class="well">
+<img src="http://seart.co/public/index.php/../assets/images/logo_tutorias.png" style="margin: -23px 0px 23px 0px">
+</div>

@@ -56,7 +56,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				else:
 				?>
 				<tr>
-					<td colspan="<?php echo $num_columns; ?>">No records found that match your selection.</td>
+					<td colspan="<?php echo $num_columns; ?>">No se han encontrado registros que coinciden con su selección. </td>
 				</tr>
 				<?php endif; ?>
 			</tbody>

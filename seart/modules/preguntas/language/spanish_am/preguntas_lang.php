@@ -3,26 +3,26 @@
 $lang['preguntas_manage']			= 'Gestión de Preguntas';
 $lang['preguntas_edit']				= 'Editar';
 $lang['preguntas_true']				= 'True';
-$lang['preguntas_false']				= 'False';
+$lang['preguntas_false']			= 'False';
 $lang['preguntas_create']			= 'Crear';
 $lang['preguntas_list']				= 'Listar';
 $lang['preguntas_new']				= 'Nueva';
-$lang['preguntas_edit_text']			= 'Edit this to suit your needs';
-$lang['preguntas_no_records']		= 'There aren\'t any preguntas in the system.';
-$lang['preguntas_create_new']		= 'Create a new Preguntas.';
-$lang['preguntas_create_success']	= 'Preguntas successfully created.';
-$lang['preguntas_create_failure']	= 'There was a problem creating the preguntas: ';
-$lang['preguntas_create_new_button']	= 'Create New Preguntas';
-$lang['preguntas_invalid_id']		= 'Invalid Preguntas ID.';
-$lang['preguntas_edit_success']		= 'Preguntas successfully saved.';
-$lang['preguntas_edit_failure']		= 'There was a problem saving the preguntas: ';
-$lang['preguntas_delete_success']	= 'record(s) successfully deleted.';
-$lang['preguntas_delete_failure']	= 'We could not delete the record: ';
-$lang['preguntas_delete_error']		= 'You have not selected any records to delete.';
+$lang['preguntas_edit_text']		= 'Edite según sus necesidades.';
+$lang['preguntas_no_records']		= 'No hay ninguna pregunta en el sistema.';
+$lang['preguntas_create_new']		= 'Crear una nueva pregunta.';
+$lang['preguntas_create_success']	= 'Pregunta creada satisfactoriamente.';
+$lang['preguntas_create_failure']	= 'Hubo un problema al crear la pregunta: ';
+$lang['preguntas_create_new_button']	= 'Crear nueva pregunta';
+$lang['preguntas_invalid_id']		= 'ID de pregunta no válido.';
+$lang['preguntas_edit_success']		= 'Preguntas guardadas satisfactoriamente.';
+$lang['preguntas_edit_failure']		= 'Hubo un problema al guardar la pregunta: ';
+$lang['preguntas_delete_success']	= 'Registro(s) borrados satisfactoriamente.';
+$lang['preguntas_delete_failure']	= 'No se puede borrar el registro: ';
+$lang['preguntas_delete_error']		= 'No tienes seleccionado ningún registro para borrar.';
 $lang['preguntas_actions']			= 'Acciones';
 $lang['preguntas_cancel']			= 'Cancelar';
 $lang['preguntas_delete_record']		= 'Borrar';
-$lang['preguntas_delete_confirm']	= 'Are you sure you want to delete this preguntas?';
+$lang['preguntas_delete_confirm']	= '¿Estás seguro de borrar la(s) pregunta(s)?';
 $lang['preguntas_edit_heading']		= 'Editar Preguntas';
 
 // Create/Edit Buttons
@@ -30,11 +30,11 @@ $lang['preguntas_action_edit']		= 'Guardar';
 $lang['preguntas_action_create']		= 'Agregar';
 
 // Activities
-$lang['preguntas_act_create_record']	= 'Created record with ID';
-$lang['preguntas_act_edit_record']	= 'Updated record with ID';
-$lang['preguntas_act_delete_record']	= 'Deleted record with ID';
+$lang['preguntas_act_create_record']	= 'Registro creado con ID';
+$lang['preguntas_act_edit_record']	= 'Registro actualizado con ID';
+$lang['preguntas_act_delete_record']	= 'Registro borrado ID';
 
 // Column Headings
-$lang['preguntas_column_created']	= 'Created';
-$lang['preguntas_column_deleted']	= 'Deleted';
-$lang['preguntas_column_modified']	= 'Modified';
+$lang['preguntas_column_created']	= 'Creado';
+$lang['preguntas_column_deleted']	= 'Borrado';
+$lang['preguntas_column_modified']	= 'Modificado';
