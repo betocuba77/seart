@@ -70,7 +70,7 @@ class gestion extends Admin_Controller{
 	 */
 	public function create() {
 		$this->auth->restrict('Preguntas.Gestion.Create');
-
+		//echo '<pre>'; print_r($this->input->post()); echo '</pre>'; exit;
 		if (isset($_POST['save'])) {
 			if ($insert_id = $this->save_preguntas()) {
 				// Log the activity
@@ -82,8 +82,8 @@ class gestion extends Admin_Controller{
 				Template::set_message(lang('preguntas_create_failure') . $this->preguntas_model->error, 'error');
 			}
 		}
-		Assets::add_module_js('preguntas', 'preguntas.js');
 
+		Assets::add_module_js('preguntas', 'preguntas.js');
 		Template::set('toolbar_title', lang('preguntas_create') . ' Preguntas');
 		Template::render();
 	}

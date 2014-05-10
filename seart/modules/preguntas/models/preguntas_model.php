@@ -66,17 +66,20 @@ class Preguntas_model extends BF_Model {
 	
 	public function insert($data, $respuestas){
 		// Se inserta las preguntas sin los tipos de respuesta y se recupera el id
-		$this->db->insert($this->table_name, $data);
-		// se recupera el ID de la ultima insercion
-		$id = $this->db->insert_id();
+		
+		$id = parent::insert($data);
+		//echo $id; exit;
 		if (!empty($respuestas)) {
-			
-			foreach ($respuestas as $key => $value) {
-				if ($value =! '') {
-					$valores = array('pregunta_id' => $id, 'descripcion' => $value);
-					$this->db->insert('tipos_respuesta', $valores);
+			foreach ($respuestas as $value) {
+				//echo $value; exit;
+				if ($value =! '') {					
+					$query = 'INSERT (pregunta_id, descripcion) INTO '
+					$this->db->set('pregunta_id', $id);
+					$this->db->set('descripcion', $value);					
+					$this->db->insert('tipos_respuesta');
 				}				
 			}			
 		}
+		return TRUE;
 	}
 }
