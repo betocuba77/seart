@@ -129,13 +129,14 @@ class gestion extends Admin_Controller{
 				Template::set_message(lang('preguntas_delete_failure') . $this->preguntas_model->error, 'error');
 			}
 		}
+
+		Template::set('respuestas', $this->preguntas_model->find_respuestas($id));
 		Template::set('preguntas', $this->preguntas_model->find($id));
 		Template::set('toolbar_title', lang('preguntas_edit') .' Preguntas');
 		Template::render();
 	}
 
-	//--------------------------------------------------------------------
-
+	//--------------------------------------------------------------------	
 	//--------------------------------------------------------------------
 	// !PRIVATE METHODS
 	//--------------------------------------------------------------------
@@ -155,7 +156,7 @@ class gestion extends Admin_Controller{
 
 		// make sure we only pass in the fields we want
 		//echo '<pre>'; print_r($this->input->post()); echo '</pre>'; exit;
-
+		$return = TRUE;
 		$data = array();
 		$data['descripcion']        = $this->input->post('preguntas_descripcion');
 		$data['factor']        = $this->input->post('preguntas_factor');
@@ -171,7 +172,9 @@ class gestion extends Admin_Controller{
 				$return = FALSE;
 			}
 		} elseif ($type == 'update') {
-			$return = $this->preguntas_model->update($id, $data);
+			$respuestas = $this->input->post('respuestas');
+			//echo '<pre>'; print_r($respuestas); echo '</pre>'; exit;
+			$return = $this->preguntas_model->update($id, $data, $respuestas);
 		}
 
 		return $return;

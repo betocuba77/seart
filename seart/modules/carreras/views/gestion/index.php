@@ -40,21 +40,21 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				?>
 				<tr>
 					<?php if ($can_delete) : ?>
-					<td class="column-check"><input type="checkbox" name="checked[]" value="<?php echo $record->carrera_id; ?>" /></td>
+					<td class="column-check"><input type="checkbox" name="checked[]" value="<?php echo $record->plan_carrera_id; ?>" /></td>
 					<?php endif;?>
 					
 				<?php if ($can_edit) : ?>
-					<td><?php echo anchor(SITE_AREA . '/gestion/carreras/edit/' . $record->carrera_id, '<span class="icon-pencil"></span>' .  $record->nombre); ?></td>
+					<td><?php echo anchor(SITE_AREA . '/gestion/carreras/edit/' . $record->plan_carrera_id, '<span class="icon-pencil"></span>' .  $record->nombre); ?></td>
 				<?php else : ?>
 					<td><?php e($record->nombre); ?></td>
 				<?php endif; ?>
 					<td><?php e($record->anio_plan.' '.$record->version) ?></td>
 					<td><?php switch ($record->facultad) {
 						case '0': echo 'Facultad de Ingenier&iacute;a'; break;
-						case '0': echo 'Facultad de Ingenier&iacute;a'; break;
-						case '0': echo 'Facultad de Ingenier&iacute;a'; break;
-						case '0': echo 'Facultad de Ingenier&iacute;a'; break;						
-						}
+						case '1': echo 'Facultad de Ciencias Agrarias'; break;
+						case '2': echo 'Facultad de Humanidades y Ciencias Sociales'; break;
+						case '3': echo 'Facultad de Ciencias Econ&oacute;micas'; break;						
+						}					
 					?></td>
 				</tr>
 				<?php

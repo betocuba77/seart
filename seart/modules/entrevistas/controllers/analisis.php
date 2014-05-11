@@ -3,8 +3,7 @@
 /**
  * analisis controller
  */
-class analisis extends Admin_Controller
-{
+class analisis extends Admin_Controller{
 
 	//--------------------------------------------------------------------
 
@@ -14,8 +13,7 @@ class analisis extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->auth->restrict('Entrevistas.Analisis.View');
@@ -37,34 +35,28 @@ class analisis extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function index()
-	{
+	public function index(){
 
 		// Deleting anything?
-		if (isset($_POST['delete']))
-		{
+		if (isset($_POST['delete'])) {
 			$checked = $this->input->post('checked');
 
-			if (is_array($checked) && count($checked))
-			{
+			if (is_array($checked) && count($checked)) {
 				$result = FALSE;
-				foreach ($checked as $pid)
-				{
+				foreach ($checked as $pid) {
 					$result = $this->entrevistas_model->delete($pid);
 				}
 
-				if ($result)
-				{
+				if ($result) {
 					Template::set_message(count($checked) .' '. lang('entrevistas_delete_success'), 'success');
-				}
-				else
-				{
+				} else {
 					Template::set_message(lang('entrevistas_delete_failure') . $this->entrevistas_model->error, 'error');
 				}
 			}
 		}
 
-		$records = $this->entrevistas_model->find_all();
+		$id = $this->current_user->id;
+		$records = $this->entrevistas_model->find_all_tutorandos($id);
 
 		Template::set('records', $records);
 		Template::set('toolbar_title', 'Manage Entrevistas');
@@ -73,28 +65,37 @@ class analisis extends Admin_Controller
 
 	//--------------------------------------------------------------------
 
+	public function entrevistar($entrevista, $entrevistador, $entrevistado){
+		
+		// Se recupera los datos del tutor
+		$this->load->model('users/user_model');
+		$tutor = $this->user_model->find($entrevistador);
 
+		//echo '<pre>'; print_r($tutor); echo '</pre>'; exit;
+		// Datos del tutorando
+		$this->load->model('tutorandos/tutorandos_model');
+		$tutorando = $this->tutorandos_model->find($entrevistado);
+		echo '<pre>'; print_r($tutorando); echo '</pre>'; exit;
+
+		// Preguntas de la entrevista
+		$preguntas = $this->entrevistas_model->preguntas($entrevista);
+	}
 	/**
 	 * Creates a Entrevistas object.
 	 *
 	 * @return void
 	 */
-	public function create()
-	{
+	public function create(){
 		$this->auth->restrict('Entrevistas.Analisis.Create');
 
-		if (isset($_POST['save']))
-		{
-			if ($insert_id = $this->save_entrevistas())
-			{
+		if (isset($_POST['save'])) {
+			if ($insert_id = $this->save_entrevistas()){
 				// Log the activity
 				log_activity($this->current_user->id, lang('entrevistas_act_create_record') .': '. $insert_id .' : '. $this->input->ip_address(), 'entrevistas');
 
 				Template::set_message(lang('entrevistas_create_success'), 'success');
 				redirect(SITE_AREA .'/analisis/entrevistas');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('entrevistas_create_failure') . $this->entrevistas_model->error, 'error');
 			}
 		}
@@ -112,47 +113,36 @@ class analisis extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function edit()
-	{
+	public function edit(){
 		$id = $this->uri->segment(5);
 
-		if (empty($id))
-		{
+		if (empty($id)) {
 			Template::set_message(lang('entrevistas_invalid_id'), 'error');
 			redirect(SITE_AREA .'/analisis/entrevistas');
 		}
 
-		if (isset($_POST['save']))
-		{
+		if (isset($_POST['save'])) {
 			$this->auth->restrict('Entrevistas.Analisis.Edit');
 
-			if ($this->save_entrevistas('update', $id))
-			{
+			if ($this->save_entrevistas('update', $id)){
 				// Log the activity
 				log_activity($this->current_user->id, lang('entrevistas_act_edit_record') .': '. $id .' : '. $this->input->ip_address(), 'entrevistas');
 
 				Template::set_message(lang('entrevistas_edit_success'), 'success');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('entrevistas_edit_failure') . $this->entrevistas_model->error, 'error');
 			}
-		}
-		else if (isset($_POST['delete']))
-		{
+		} else if (isset($_POST['delete'])) {
 			$this->auth->restrict('Entrevistas.Analisis.Delete');
 
-			if ($this->entrevistas_model->delete($id))
-			{
+			if ($this->entrevistas_model->delete($id)) {
 				// Log the activity
 				log_activity($this->current_user->id, lang('entrevistas_act_delete_record') .': '. $id .' : '. $this->input->ip_address(), 'entrevistas');
 
 				Template::set_message(lang('entrevistas_delete_success'), 'success');
 
 				redirect(SITE_AREA .'/analisis/entrevistas');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('entrevistas_delete_failure') . $this->entrevistas_model->error, 'error');
 			}
 		}
@@ -175,10 +165,8 @@ class analisis extends Admin_Controller
 	 *
 	 * @return Mixed    An INT id for successful inserts, TRUE for successful updates, else FALSE
 	 */
-	private function save_entrevistas($type='insert', $id=0)
-	{
-		if ($type == 'update')
-		{
+	private function save_entrevistas($type='insert', $id=0){
+		if ($type == 'update') {
 			$_POST['entrevista_id'] = $id;
 		}
 
@@ -189,21 +177,15 @@ class analisis extends Admin_Controller
 		$data['entrevistado']        = $this->input->post('entrevistas_entrevistado');
 		$data['fecha']        = $this->input->post('entrevistas_fecha') ? $this->input->post('entrevistas_fecha') : '0000-00-00';
 
-		if ($type == 'insert')
-		{
+		if ($type == 'insert') {
 			$id = $this->entrevistas_model->insert($data);
 
-			if (is_numeric($id))
-			{
+			if (is_numeric($id)) {
 				$return = $id;
-			}
-			else
-			{
+			} else {
 				$return = FALSE;
 			}
-		}
-		elseif ($type == 'update')
-		{
+		} elseif ($type == 'update'){
 			$return = $this->entrevistas_model->update($id, $data);
 		}
 

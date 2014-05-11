@@ -1,5 +1,4 @@
 <?php
-
 $num_columns	= 3;
 $can_delete	= $this->auth->has_permission('Preguntas.Gestion.Delete');
 $can_edit		= $this->auth->has_permission('Preguntas.Gestion.Edit');

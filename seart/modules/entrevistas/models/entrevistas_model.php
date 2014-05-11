@@ -45,27 +45,46 @@ class Entrevistas_model extends BF_Model {
 		That way it is only required during inserts, not updates which may only
 		be updating a portion of the data.
 	 */
-	protected $validation_rules 		= array(
-		array(
-			"field"		=> "entrevistas_entrevistador",
-			"label"		=> "Entrevistador",
-			"rules"		=> "max_length[20]"
-		),
-		array(
-			"field"		=> "entrevistas_entrevistado",
-			"label"		=> "Entrevistado",
-			"rules"		=> "max_length[11]"
-		),
-		array(
-			"field"		=> "entrevistas_fecha",
-			"label"		=> "Fecha",
-			"rules"		=> "required"
-		),
-	);
+	
 	protected $insert_validation_rules 	= array();
 	protected $skip_validation 			= FALSE;
 
 	//--------------------------------------------------------------------
 	
+	public function insert_plantilla($data, $preguntas){
 
+		// Insertamos los datos de la plantilla
+		$id = $this->db->insert('plantillas',$data);
+		if (is_array($preguntas)) {
+			foreach ($preguntas as $key => $value) {
+				$pregunta = array('pregunta_id' => $value, 'plantilla_id' => $id);				
+				$this->db->insert('plantilla_pregunta', $pregunta);
+			}
+		}
+
+		return $id;
+	}
+
+	public function find_all_plantillas(){
+		return $this->db->get('plantillas')->result();
+	}
+
+	public function find_all(){
+		$query = 'SELECT u.name, u.surname, t.nombre, t.apellido, e.entrevista_id, u.role_id, e.fecha FROM st_users as u, st_entrevistas as e, st_tutorandos as t WHERE u.id = e.entrevistador AND t.tutorando_id = e.entrevistado AND u.role_id = 7'; 
+		$query = $this->db->query($query);
+
+		return $query->result();
+	}
+
+	public function find_all_tutorandos($id){
+		$query = 'SELECT u.name, u.surname, t.nombre, t.apellido, e.entrevista_id, t.tutorando_id, u.id, u.role_id, e.fecha FROM st_users as u, st_entrevistas as e, st_tutorandos as t WHERE u.id = e.entrevistador AND t.tutorando_id = e.entrevistado AND u.role_id = 7 AND u.id ='.$id; 
+		$query = $this->db->query($query);
+
+		return $query->result();	
+	}
+
+	// funcion que recupera las preguntas de determinada entrevvista
+	public function preguntas($id){
+
+	}
 }

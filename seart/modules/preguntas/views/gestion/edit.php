@@ -1,19 +1,5 @@
 <?php
-
-$validation_errors = validation_errors();
-
-if ($validation_errors) :
-?>
-<div class="alert alert-block alert-error fade in">
-	<a class="close" data-dismiss="alert">&times;</a>
-	<h4 class="alert-heading">Please fix the following errors:</h4>
-	<?php echo $validation_errors; ?>
-</div>
-<?php
-endif;
-
-if (isset($preguntas))
-{
+if (isset($preguntas)) {
 	$preguntas = (array) $preguntas;
 }
 $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
@@ -37,6 +23,15 @@ $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
 				echo form_dropdown('preguntas_factor', $factores, set_value('preguntas_factor', isset($preguntas['factor']) ? $preguntas['factor'] : ''), 'Factor');
 			?>
 
+			<?php $i = 0;  foreach ($respuestas as $respuesta) { ?>
+				<div class="control-group">
+					<label class="control-label">Opcion de respuesta: <?= ++$i ?> </label>
+					<div class="controls">
+						<input style="width:60%" type="text" name="respuestas[<?=  $respuesta->tipo_respuesta_id ?>]" value="<?= $respuesta->descripcion ?>">
+					</div>
+				</div>		
+			<?php }	?>
+			
 			<div class="form-actions">
 				<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('preguntas_action_edit'); ?>"  />
 				<?php echo lang('bf_or'); ?>

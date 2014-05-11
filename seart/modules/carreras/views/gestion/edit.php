@@ -5,7 +5,7 @@ $validation_errors = validation_errors();
 if (isset($carreras)){
 	$carreras = (array) $carreras;
 }
-$id = isset($carreras['carrera_id']) ? $carreras['carrera_id'] : '';
+$id = isset($carreras[0]->plan_carrera_id) ? $carreras[0]->plan_carrera_id : '';
 
 ?>
 <div class="admin-box">
@@ -16,19 +16,12 @@ $id = isset($carreras['carrera_id']) ? $carreras['carrera_id'] : '';
 			<div class="control-group <?php echo form_error('nombre') ? 'error' : ''; ?>">
 				<?php echo form_label('Nombre'. lang('bf_form_label_required'), 'nombre', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='nombre' type='text' name='nombre' maxlength="60" value="<?php echo set_value('nombre', isset($carreras['nombre']) ? $carreras['nombre'] : ''); ?>" />
+					<input id='nombre' type='text' name='nombre' maxlength="60" value="<?php echo set_value('nombre', isset($carreras[0]->nombre) ? $carreras[0]->nombre : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('nombre'); ?></span>
 				</div>
 			</div>
-
-			<?php // Change the values in this array to populate your dropdown as required
-				$planes = array(
-					2007 => '2007',
-					2008 => '2008',
-					2010 => '2010',
-					2013 => '2013',
-				);
-				echo form_dropdown('plan', $planes, set_value('plan', isset($carreras['plan']) ? $carreras['plan'] : ''), 'Plan de Estudio');				
+			<?php
+				echo form_dropdown('plan', $planes, set_value('plan', isset($carreras[0]->plan_id) ? $carreras[0]->plan_id : ''), 'Plan de Estudio');				
 			?>
 
 			<?php // Change the values in this array to populate your dropdown as required
@@ -39,7 +32,7 @@ $id = isset($carreras['carrera_id']) ? $carreras['carrera_id'] : '';
 					3 => 'Facultad de Ciencias Econ&oacute;micas',
 				);
 
-				echo form_dropdown('facultad', $options, set_value('facultad', isset($carreras['facultad']) ? $carreras['facultad'] : ''), 'Facultad'. lang('bf_form_label_required'));
+				echo form_dropdown('facultad', $options, set_value('facultad', isset($carreras[0]->facultad) ? $carreras[0]->facultad : ''), 'Facultad');
 			?>
 
 			<div class="form-actions">

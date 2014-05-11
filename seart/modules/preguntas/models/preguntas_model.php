@@ -71,15 +71,30 @@ class Preguntas_model extends BF_Model {
 		//echo $id; exit;
 		if (!empty($respuestas)) {
 			foreach ($respuestas as $value) {
-				//echo $value; exit;
-				if ($value =! '') {					
-					$query = 'INSERT (pregunta_id, descripcion) INTO '
-					$this->db->set('pregunta_id', $id);
-					$this->db->set('descripcion', $value);					
-					$this->db->insert('tipos_respuesta');
-				}				
+				
+				$this->db->set('pregunta_id', $id);
+				$this->db->set('descripcion', $value);					
+				$this->db->insert('tipos_respuesta');				
 			}			
 		}
-		return TRUE;
+		return $id;
+	}
+
+	public function find_respuestas($id){
+		$query = $this->db->from('tipos_respuesta')->where('pregunta_id', $id)->get();
+		if ($query->num_rows()> 0) {
+			return $query->result();
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function update($id, $data, $respuestas){
+		foreach ($respuestas as $key => $value) {
+			$respuesta = array('pregunta_id' => $id, 'descripcion' => $value);
+			$this->db->where('tipo_respuesta_id', $key);
+			$this->db->update('tipos_respuesta', $respuesta);
+		}
+		return parent::update($id, $data);
 	}
 }

@@ -98,50 +98,47 @@ class gestion extends Admin_Controller{
 	 *
 	 * @return void
 	 */
-	public function edit()
-	{
+	public function edit(){
 		$id = $this->uri->segment(5);
 
-		if (empty($id))
-		{
+		if (empty($id)){
 			Template::set_message(lang('carreras_invalid_id'), 'error');
 			redirect(SITE_AREA .'/gestion/carreras');
 		}
 
-		if (isset($_POST['save']))
-		{
+		if (isset($_POST['save'])){
 			$this->auth->restrict('Carreras.Gestion.Edit');
 
-			if ($this->save_carreras('update', $id))
-			{
+			if ($this->save_carreras('update', $id)){
 				// Log the activity
 				log_activity($this->current_user->id, lang('carreras_act_edit_record') .': '. $id .' : '. $this->input->ip_address(), 'carreras');
 
 				Template::set_message(lang('carreras_edit_success'), 'success');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('carreras_edit_failure') . $this->carreras_model->error, 'error');
 			}
 		}
-		else if (isset($_POST['delete']))
-		{
+		else if (isset($_POST['delete'])) {
 			$this->auth->restrict('Carreras.Gestion.Delete');
 
-			if ($this->carreras_model->delete($id))
-			{
+			if ($this->carreras_model->delete($id)) {
 				// Log the activity
 				log_activity($this->current_user->id, lang('carreras_act_delete_record') .': '. $id .' : '. $this->input->ip_address(), 'carreras');
 
 				Template::set_message(lang('carreras_delete_success'), 'success');
 
 				redirect(SITE_AREA .'/gestion/carreras');
-			}
-			else
-			{
+			} else {
 				Template::set_message(lang('carreras_delete_failure') . $this->carreras_model->error, 'error');
 			}
 		}
+
+		foreach ($this->carreras_model->find_all_planes() as  $value) {
+			$planes[$value->plan_id] = $value->anio_plan.' '.$value->version; 
+		}
+		
+			
+		Template::set('planes', $planes );		
 		Template::set('carreras', $this->carreras_model->find($id));
 		Template::set('toolbar_title', lang('carreras_edit') .' Carreras');
 		Template::render();
@@ -169,22 +166,20 @@ class gestion extends Admin_Controller{
 		
 		$data = array();
 		$data['nombre']        = $this->input->post('nombre');
-		$data['plan'] = $this->input->post('plan');
-		$data['facultad']        = $this->input->post('facultad');
+		$data['plan'] =  $this->input->post('plan');
+		$data['facultad']   = $this->input->post('facultad');
 
 		if ($type == 'insert'){
 			$id = $this->carreras_model->insert($data);
-
 			if (is_numeric($id)){
 				$return = $id;
 			} else {
 				$return = FALSE;
 			}
-		}
-		elseif ($type == 'update'){
+		} elseif ($type == 'update'){
 			$return = $this->carreras_model->update($id, $data);
 		}
-
+		//echo $id; exit;
 		return $return;
 	}
 

@@ -15,7 +15,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<?php if ($can_delete && $has_records) : ?>
 					<th class="column-check"><input class="check-all" type="checkbox" /></th>
 					<?php endif;?>
-					
+					<th>ID</th>
 					<th>Entrevistador</th>
 					<th>Entrevistado</th>
 					<th>Fecha</th>
@@ -44,11 +44,12 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<?php endif;?>
 					
 				<?php if ($can_edit) : ?>
-					<td><?php echo anchor(SITE_AREA . '/gestion/entrevistas/edit/' . $record->entrevista_id, '<span class="icon-pencil"></span>' .  $record->entrevistador); ?></td>
+					<td><?php echo anchor(SITE_AREA . '/gestion/entrevistas/edit/' . $record->entrevista_id, '<span class="icon-pencil"></span>' .  $record->entrevista_id); ?></td>
 				<?php else : ?>
-					<td><?php e($record->entrevistador); ?></td>
+					<td><?php e($record->entrevista_id); ?></td>
 				<?php endif; ?>
-					<td><?php e($record->entrevistado) ?></td>
+					<td><?php e($record->surname.' '.$record->name); ?></td>
+					<td><?php e($record->apellido).' '.e($record->apellido) ?></td>
 					<td><?php e($record->fecha) ?></td>
 				</tr>
 				<?php

@@ -89,52 +89,22 @@ class Tutorandos_model extends BF_Model {
 			"rules"		=> "required|valid_email|max_length[100]"
 		),
 		array(
-			"field"		=> "tutorandos_domicilio",
-			"label"		=> "Domicilio",
+			"field"		=> "calle",
+			"label"		=> "Calle",
 			"rules"		=> "required|max_length[150]"
-		),
-		array(
-			"field"		=> "tutorandos_barrio",
-			"label"		=> "Barrio",
-			"rules"		=> "required|max_length[11]"
-		),
-		array(
-			"field"		=> "tutorandos_localidad",
-			"label"		=> "Localidad",
-			"rules"		=> "required|max_length[11]"
-		),
-		array(
-			"field"		=> "tutorandos_departamento",
-			"label"		=> "Departamento",
-			"rules"		=> "required|max_length[11]"
-		),
-		array(
-			"field"		=> "tutorandos_provincia",
-			"label"		=> "Provincia",
-			"rules"		=> "required|max_length[11]"
-		),
-		array(
-			"field"		=> "tutorandos_pais",
-			"label"		=> "Pais",
-			"rules"		=> "required|max_length[11]"
-		),
-		array(
-			"field"		=> "tutorandos_carrera",
-			"label"		=> "Carrera",
-			"rules"		=> "max_length[11]"
-		),
+		),		
 		array(
 			"field"		=> "tutorandos_lu",
 			"label"		=> "LU",
 			"rules"		=> "max_length[10]"
 		),
 		array(
-			"field"		=> "tutorandos_anio_ingreso",
+			"field"		=> "anio_ingreso",
 			"label"		=> "Ingreso",
 			"rules"		=> "required|max_length[4]"
 		),
 		array(
-			"field"		=> "tutorandos_colegio_secundario",
+			"field"		=> "colegio_secundario",
 			"label"		=> "Colegio Secundario",
 			"rules"		=> "required|max_length[150]"
 		),
@@ -153,11 +123,17 @@ class Tutorandos_model extends BF_Model {
 	protected $skip_validation 			= FALSE;
 
 	//--------------------------------------------------------------------
-
+	public function find_all_tutores(){
+		$query = $this->db->from('users')->where('role_id', 7)->get();
+		foreach ($query->result() as $row) {
+			$tutor[$row->id] = $row->surname.' '.$row->name;
+		}
+		return $tutor;
+	}
 	public function find_all(){			
 		$this->db->select('tutorando_id, tutorandos.nombre, apellido, telefono_movil, tutorandos.email as correo, surname, id');
 		$this->db->from('users');
-		$query = $this->db->join('tutorandos','users.id = tutorandos.tutor')->get();
+		$query = $this->db->join('tutorandos','users.id = tutorandos.tutor_id')->get();
 		
 		return $query->result();
 	}
@@ -169,5 +145,22 @@ class Tutorandos_model extends BF_Model {
 			$arreglo[$value->id] = $value->nombre;
 		}		
 		return $arreglo;
+	}
+
+	public function insert($data, $datos_domicilio){
+		//echo '<pre>'; print_r($domicilio); echo '</pre>'; exit;
+		$id = parent::insert($data);
+		$domicilio = array(
+				'persona_id' => $id,
+				'calle' => $datos_domicilio['calle'],
+				'barrio_id' => $datos_domicilio['barrio_id'],
+				'localidad_id' => $datos_domicilio['localidad_id'],
+				'departamento_id' => $datos_domicilio['departamento_id'],
+				'provincia_id' => $datos_domicilio['provincia_id'],
+				'pais_id' => $datos_domicilio['pais_id']
+			);		
+
+		$id = $this->db->insert('domicilios', $domicilio);
+		return $id;
 	}
 }

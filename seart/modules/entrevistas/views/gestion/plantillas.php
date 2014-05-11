@@ -1,20 +1,22 @@
 <?php
-
 $num_columns	= 4;
-$can_delete	= $this->auth->has_permission('Entrevistas.Analisis.Delete');
-$can_edit		= $this->auth->has_permission('Entrevistas.Analisis.Edit');
+$can_delete	= $this->auth->has_permission('Entrevistas.Gestion.Delete');
+$can_edit		= $this->auth->has_permission('Entrevistas.Gestion.Edit');
 $has_records	= isset($records) && is_array($records) && count($records);
 
 ?>
 <div class="admin-box">
-	<h3>Entrevistas</h3>
+	<h3>Plantillas</h3>
 	<?php echo form_open($this->uri->uri_string()); ?>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>					
-					<th>Tutorando</th>
-					<th>Acciones</th>					
+					<?php if ($can_delete && $has_records) : ?>
+					<th class="column-check"><input class="check-all" type="checkbox" /></th>
+					<?php endif;?>
+					<th>ID</th>
+					<th>Año</th>
+					<th>Descripcion</th>					
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -36,16 +38,15 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				?>
 				<tr>
 					<?php if ($can_delete) : ?>
-					<td class="column-check"><input type="checkbox" name="checked[]" value="<?php echo $record->entrevista_id; ?>" /></td>
+					<td class="column-check"><input type="checkbox" name="checked[]" value="<?php echo $record->plantilla_id; ?>" /></td>
 					<?php endif;?>
 					
 				<?php if ($can_edit) : ?>
-					<td><?php echo anchor(SITE_AREA . '/analisis/entrevistas/edit/' . $record->entrevista_id, '<span class="icon-pencil"></span>' .  $record->entrevista_id); ?></td>
-				<?php else : ?>
-					<td><?php e($record->entrevista_id); ?></td>
+					<td><?php echo anchor(SITE_AREA . '/gestion/entrevistas/edit/' . $record->plantilla_id, '<span class="icon-pencil"></span>' .  $record->plantilla_id); ?></td>
 				<?php endif; ?>
-					<td><?php e($record->apellido.' '.$record->nombre) ?></td>
-					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/entrevistar/'.$record->entrevista_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn">Entrevistar >></a></td>
+					<td><?php e($record->anio); ?></td>
+				
+					<td><?php e($record->descripcion) ?></td>					
 				</tr>
 				<?php
 					endforeach;

@@ -1,17 +1,5 @@
 <?php
 
-$validation_errors = validation_errors();
-
-if ($validation_errors) :
-?>
-<div class="alert alert-block alert-error fade in">
-	<a class="close" data-dismiss="alert">&times;</a>
-	<h4 class="alert-heading">Please fix the following errors:</h4>
-	<?php echo $validation_errors; ?>
-</div>
-<?php
-endif;
-
 if (isset($tutorandos)){
 	$tutorandos = (array) $tutorandos;
 }
@@ -89,41 +77,42 @@ $id = isset($tutorandos['tutorando_id']) ? $tutorandos['tutorando_id'] : '';
 		</fieldset>
 		<fieldset>	
 			<legend>Domicilio Actual</legend>
-			<div class="control-group <?php echo form_error('domicilio') ? 'error' : ''; ?>">
-				<?php echo form_label('Calle'. lang('bf_form_label_required'), 'tutorandos_domicilio', array('class' => 'control-label') ); ?>
+			<div class="control-group <?php echo form_error('calle') ? 'error' : ''; ?>">
+				<?php echo form_label('Calle'. lang('bf_form_label_required'), 'calle', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='tutorandos_domicilio' type='text' name='tutorandos_domicilio' maxlength="150" value="<?php echo set_value('tutorandos_domicilio', isset($tutorandos['domicilio']) ? $tutorandos['domicilio'] : ''); ?>" />
-					<span class='help-inline'><?php echo form_error('domicilio'); ?></span>
+					<input id='calle' type='text' name='calle' maxlength="150" value="<?php echo set_value('calle', isset($tutorandos['calle']) ? $tutorandos['calle'] : ''); ?>" />
+					<span class='help-inline'><?php echo form_error('calle'); ?></span>
 				</div>
 			</div>
 
 			<?php // Change the values in this array to populate your dropdown as required
-				echo form_dropdown('tutorandos_barrio', $barrios, set_value('tutorandos_barrio', isset($tutorandos['barrio']) ? $tutorandos['barrio'] : ''), 'Barrio'. lang('bf_form_label_required'));
-				echo form_dropdown('tutorandos_localidad', $localidades, set_value('tutorandos_localidad', isset($tutorandos['localidad']) ? $tutorandos['localidad'] : ''), 'Localidad'. lang('bf_form_label_required'));
-				echo form_dropdown('tutorandos_departamento', $departamentos, set_value('tutorandos_departamento', isset($tutorandos['departamento']) ? $tutorandos['departamento'] : ''), 'Departamento'. lang('bf_form_label_required'));
-				echo form_dropdown('tutorandos_provincia', $provincias, set_value('tutorandos_provincia', isset($tutorandos['provincia']) ? $tutorandos['provincia'] : ''), 'Provincia'. lang('bf_form_label_required'));
-				echo form_dropdown('tutorandos_pais', $paises, set_value('tutorandos_pais', isset($tutorandos['pais']) ? $tutorandos['pais'] : ''), 'Pa&iacute;s'. lang('bf_form_label_required'));
+				echo form_dropdown('barrio', $barrios, set_value('barrio', isset($tutorandos['barrio']) ? $tutorandos['barrio'] : ''), 'Barrio');
+				echo form_dropdown('localidad', $localidades, set_value('localidad', isset($tutorandos['localidad']) ? $tutorandos['localidad'] : ''), 'Localidad');
+				echo form_dropdown('departamento', $departamentos, set_value('departamento', isset($tutorandos['departamento']) ? $tutorandos['departamento'] : ''), 'Departamento');
+				echo form_dropdown('provincia', $provincias, set_value('provincia', isset($tutorandos['provincia']) ? $tutorandos['provincia'] : ''), 'Provincia');
+				echo form_dropdown('pais', $paises, set_value('pais', isset($tutorandos['pais']) ? $tutorandos['pais'] : ''), 'Pa&iacute;s');
 			?>
 		</fieldset>
 		<fieldset>
 			<legend>Datos Acad&eacute;micos - Nivel Universitario</legend>
 			<?php // Change the values in this array to populate your dropdown as required			
-				echo form_dropdown('carrera', $carreras, set_value('carrera', isset($tutorandos['carrera']) ? $tutorandos['carrera'] : ''), 'Carrera'. lang('bf_form_label_required'));
-				echo form_dropdown('plan', $planes, set_value('plan', isset($tutorandos['plan']) ? $tutorandos['plan'] : ''), 'Plan'. lang('bf_form_label_required'));
+				echo form_dropdown('tutor_id', $tutores, set_value('tutor_id', isset($tutorandos['tutor_id']) ? $tutorandos['tutor_id'] : ''), 'Tutor');?>
+			<?php // Change the values in this array to populate your dropdown as required			
+				echo form_dropdown('carrera_id', $carreras, set_value('carrera_id', isset($tutorandos['carrera_id']) ? $tutorandos['carrera_id'] : ''), 'Carrera');				
 			?>
 
 			<div class="control-group <?php echo form_error('lu') ? 'error' : ''; ?>">
-				<?php echo form_label('LU'. lang('bf_form_label_required'), 'tutorandos_lu', array('class' => 'control-label') ); ?>
+				<?php echo form_label('LU'. lang('bf_form_label_required'), 'lu', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='tutorandos_lu' type='text' name='tutorandos_lu' maxlength="10" value="<?php echo set_value('tutorandos_lu', isset($tutorandos['lu']) ? $tutorandos['lu'] : ''); ?>" />
+					<input id='lu' type='text' name='lu' maxlength="10" value="<?php echo set_value('lu', isset($tutorandos['lu']) ? $tutorandos['lu'] : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('lu'); ?></span>
 				</div>
 			</div>
 
 			<div class="control-group <?php echo form_error('anio_ingreso') ? 'error' : ''; ?>">
-				<?php echo form_label('Año de Ingreso'. lang('bf_form_label_required'), 'tutorandos_anio_ingreso', array('class' => 'control-label') ); ?>
+				<?php echo form_label('Año de Ingreso'. lang('bf_form_label_required'), 'anio_ingreso', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='tutorandos_anio_ingreso' type='text' name='tutorandos_anio_ingreso' maxlength="4" value="<?php echo set_value('tutorandos_anio_ingreso', isset($tutorandos['anio_ingreso']) ? $tutorandos['anio_ingreso'] : ''); ?>" />
+					<input id='anio_ingreso' type='text' name='anio_ingreso' maxlength="4" value="<?php echo set_value('anio_ingreso', isset($tutorandos['anio_ingreso']) ? $tutorandos['anio_ingreso'] : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('anio_ingreso'); ?></span>
 				</div>
 			</div>
@@ -131,9 +120,9 @@ $id = isset($tutorandos['tutorando_id']) ? $tutorandos['tutorando_id'] : '';
 		<fieldset>
 			<legend>Datos Acad&eacute;micos - Nivel Secundario</legend>
 			<div class="control-group <?php echo form_error('colegio_secundario') ? 'error' : ''; ?>">
-				<?php echo form_label('Colegio Secundario'. lang('bf_form_label_required'), 'tutorandos_colegio_secundario', array('class' => 'control-label') ); ?>
+				<?php echo form_label('Colegio Secundario'. lang('bf_form_label_required'), 'colegio_secundario', array('class' => 'control-label') ); ?>
 				<div class='controls'>
-					<input id='tutorandos_colegio_secundario' type='text' name='tutorandos_colegio_secundario' maxlength="150" value="<?php echo set_value('tutorandos_colegio_secundario', isset($tutorandos['colegio_secundario']) ? $tutorandos['colegio_secundario'] : ''); ?>" />
+					<input id='colegio_secundario' type='text' name='colegio_secundario' maxlength="150" value="<?php echo set_value('colegio_secundario', isset($tutorandos['colegio_secundario']) ? $tutorandos['colegio_secundario'] : ''); ?>" />
 					<span class='help-inline'><?php echo form_error('colegio_secundario'); ?></span>
 				</div>
 			</div>

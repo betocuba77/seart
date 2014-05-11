@@ -2,7 +2,7 @@
 	var nextinput = 0;
 	function AgregarCampos(){
 		nextinput++;
-		campo = '<li id="rut'+nextinput+'"><div class="control-label">Opcion de respuesta ' + nextinput +'</div><div class="controls"><input type="text" size="20" id="opcion' + nextinput + '"  name="campo[' + nextinput + ']"  /></div></li><br>';
+		campo = '<li id="rut'+nextinput+'"><div class="control-label">Opcion de respuesta ' + nextinput +'</div><div class="controls"><input type="text" style="width:60%" id="opcion' + nextinput + '"  name="campo[' + nextinput + ']"  /></div></li><br>';
 		$("#campos").append(campo);
 	}
 </script>

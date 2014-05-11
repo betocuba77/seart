@@ -61,6 +61,8 @@ class Carreras_model extends BF_Model {
 		$this->db->from('plan_carrera');
 		$this->db->join('carreras', 'carreras.carrera_id = plan_carrera.carrera_id', 'left');
 		$query = $this->db->join('planes_de_estudio','planes_de_estudio.plan_id = plan_carrera.plan_id', 'left')->get();
+		
+		//echo '<pre>'; print_r($query->result()); echo '</pre>'; exit;
 		return $query->result();
 	}
 
@@ -79,6 +81,43 @@ class Carreras_model extends BF_Model {
 		} else {
 			return FALSE;
 		}
+	}
+
+	public function insert($data){
+		// Verifico que el nombre de carrera ya no exista.
+		if ($this->db->from('carreras')->where('nombre', $data['nombre'])->get()->num_rows() > 0) {
+			// recupero el id
+			$row = $this->db->from('carreras')->where('nombre', $data['nombre'])->get()->row();			
+			$id = $row->carrera_id;
+		} else {
+			$this->db->set('nombre', $data['nombre']);
+			$this->db->set('facultad', $data['facultad']);
+			$this->db->insert('carreras');
+			$id = $this->db->insert_id();	
+		}
+		
+		// Insertamos los datos en la tabla realacionada
+		$this->db->set('plan_id', $data['plan']);
+		$this->db->set('carrera_id', $id);
+		$ids = $this->db->insert('plan_carrera');
+
+		//echo $ids; exit;
+		return $ids;
+	}
+
+	public function update($id, $data){
+		
+
+	}
+
+	public function find($id){
+		$this->db->select('nombre, facultad, carreras.carrera_id, planes_de_estudio.plan_id, anio_plan, version, plan_carrera_id');
+		$this->db->from('carreras');
+		$this->db->where('plan_carrera_id', $id);
+		$this->db->join('plan_carrera', 'carreras.carrera_id = plan_carrera.carrera_id', 'left');
+		$query = $this->db->join('planes_de_estudio','planes_de_estudio.plan_id = plan_carrera.plan_id', 'left')->get();
+		
+		return $query->result();
 	}
 
 }
