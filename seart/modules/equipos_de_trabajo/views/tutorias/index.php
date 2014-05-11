@@ -15,9 +15,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<?php if ($can_delete && $has_records) : ?>
 					<th class="column-check"><input class="check-all" type="checkbox" /></th>
 					<?php endif;?>
-					
 					<th>Nombre del Equipo</th>
-					<th>Descripcion</th>
+					<th>Descripción</th>
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -54,7 +53,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				else:
 				?>
 				<tr>
-					<td colspan="<?php echo $num_columns; ?>">No records found that match your selection.</td>
+					<td colspan="<?php echo $num_columns; ?>">No se han encontrado registros que coinciden con su selección.</td>
 				</tr>
 				<?php endif; ?>
 			</tbody>

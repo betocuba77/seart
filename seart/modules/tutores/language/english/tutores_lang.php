@@ -1,40 +1,40 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$lang['tutores_manage']			= 'Manage Tutores';
-$lang['tutores_edit']				= 'Edit';
+$lang['tutores_manage']				= 'Gestión de Tutores';
+$lang['tutores_edit']				= 'Editar';
 $lang['tutores_true']				= 'True';
 $lang['tutores_false']				= 'False';
-$lang['tutores_create']			= 'Create';
-$lang['tutores_list']				= 'List';
-$lang['tutores_new']				= 'New';
-$lang['tutores_edit_text']			= 'Edit this to suit your needs';
-$lang['tutores_no_records']		= 'There aren\'t any tutores in the system.';
-$lang['tutores_create_new']		= 'Create a new Tutores.';
-$lang['tutores_create_success']	= 'Tutores successfully created.';
-$lang['tutores_create_failure']	= 'There was a problem creating the tutores: ';
-$lang['tutores_create_new_button']	= 'Create New Tutores';
-$lang['tutores_invalid_id']		= 'Invalid Tutores ID.';
-$lang['tutores_edit_success']		= 'Tutores successfully saved.';
-$lang['tutores_edit_failure']		= 'There was a problem saving the tutores: ';
-$lang['tutores_delete_success']	= 'record(s) successfully deleted.';
-$lang['tutores_delete_failure']	= 'We could not delete the record: ';
-$lang['tutores_delete_error']		= 'You have not selected any records to delete.';
-$lang['tutores_actions']			= 'Actions';
-$lang['tutores_cancel']			= 'Cancel';
-$lang['tutores_delete_record']		= 'Delete this Tutores';
-$lang['tutores_delete_confirm']	= 'Are you sure you want to delete this tutores?';
-$lang['tutores_edit_heading']		= 'Edit Tutores';
+$lang['tutores_create']				= 'Crear';
+$lang['tutores_list']				= 'Listar';
+$lang['tutores_new']				= 'Nuevo';
+$lang['tutores_edit_text']			= 'Edite según sus necesidades.';
+$lang['tutores_no_records']			= 'No hay ningún tutor en el sistema.';
+$lang['tutores_create_new']			= 'Crear un nuevo tutor.';
+$lang['tutores_create_success']		= 'Tutor creado correctamente.';
+$lang['tutores_create_failure']		= 'Hubo un problema al crear el tutor: ';
+$lang['tutores_create_new_button']	= 'Crear nuevo tutor.';
+$lang['tutores_invalid_id']			= 'ID de Tutor no válido.';
+$lang['tutores_edit_success']		= 'Tutor guardado correctamente.';
+$lang['tutores_edit_failure']		= 'Hubo un problema al guardar el tutor: ';
+$lang['tutores_delete_success']		= 'Registro(s) borrados correctamente.';
+$lang['tutores_delete_failure']		= 'No se puede borrar el registro: ';
+$lang['tutores_delete_error']		= 'No tienes seleccionado ningún registro para borrar.';
+$lang['tutores_actions']			= 'Acciones';
+$lang['tutores_cancel']				= 'Cancelar';
+$lang['tutores_delete_record']		= 'Borrar este tutor.';
+$lang['tutores_delete_confirm']		= '¿Estás seguro de borrar este tutor?';
+$lang['tutores_edit_heading']		= 'Editar tutor';
 
 // Create/Edit Buttons
-$lang['tutores_action_edit']		= 'Save Tutores';
-$lang['tutores_action_create']		= 'Create Tutores';
+$lang['tutores_action_edit']		= 'Guardar tutor';
+$lang['tutores_action_create']		= 'Crear tutor';
 
 // Activities
-$lang['tutores_act_create_record']	= 'Created record with ID';
-$lang['tutores_act_edit_record']	= 'Updated record with ID';
-$lang['tutores_act_delete_record']	= 'Deleted record with ID';
+$lang['tutores_act_create_record']	= 'Registro creado con ID';
+$lang['tutores_act_edit_record']	= 'Registro actualizado con ID';
+$lang['tutores_act_delete_record']	= 'Registro borrado con ID';
 
 // Column Headings
-$lang['tutores_column_created']	= 'Created';
-$lang['tutores_column_deleted']	= 'Deleted';
-$lang['tutores_column_modified']	= 'Modified';
+$lang['tutores_column_created']		= 'Creado';
+$lang['tutores_column_deleted']		= 'Borrado';
+$lang['tutores_column_modified']	= 'Modificado';
