@@ -14,7 +14,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				<tr>
 					<th>ID</th>					
 					<th>Tutorando</th>
-					<th>Acciones</th>					
+					<th>Realizar entrevista</th>	
+					<th>Ver análisis</th>				
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
