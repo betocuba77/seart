@@ -84,7 +84,33 @@ class Entrevistas_model extends BF_Model {
 	}
 
 	// funcion que recupera las preguntas de determinada entrevvista
-	public function preguntas($id){
+	public function find_preguntas($id){
+		$this->db->select('entrevista_id, entrevistador, entrevistado, preguntas.descripcion as pdescripcion, preguntas.pregunta_id, factor, tipo_respuesta');
+		$this->db->from('plantilla_pregunta');		
+		$this->db->where('entrevistas.entrevista_id', $id);
+		$this->db->join('entrevistas','entrevistas.plantilla = plantilla_pregunta.plantilla_id', 'left');
+		$query = $this->db->join('preguntas', 'preguntas.pregunta_id = plantilla_pregunta.pregunta_id', 'left')->get();
 
+		//echo '<pre>'; print_r($query->result()); echo '</pre>'; exit;
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $pregunta) {
+			$preguntas[$pregunta->pregunta_id] = array(
+				'pregunta_id' => $pregunta->pregunta_id, 
+				'entrevistador'=> $pregunta->entrevistador,
+				'entrevistado' => $pregunta->entrevistado,
+				'factor' => $pregunta->factor,
+				'tipo_respuesta' => $pregunta->tipo_respuesta,
+				'pdescripcion' => $pregunta->pdescripcion,
+				'pregunta_id' => $pregunta->pregunta_id,
+				'tipos_respuesta' => $this->db->select('tipos_respuesta.tipo_respuesta_id, tipos_respuesta.descripcion as tdescripcion')->from('tipos_respuesta')->where('tipos_respuesta.pregunta_id',$pregunta->pregunta_id)->get()->result()
+				);
+			}
+		}
+		
+		return $preguntas;
+	}
+
+	public function insert_respuesta($array){
+		
 	}
 }

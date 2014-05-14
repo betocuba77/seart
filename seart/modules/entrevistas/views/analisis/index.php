@@ -14,7 +14,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				<tr>
 					<th>ID</th>					
 					<th>Tutorando</th>
-					<th>Acciones</th>					
+					<th>Realizar entrevista</th>
+					<th>Realizar análisis</th>					
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -45,7 +46,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<td><?php e($record->entrevista_id); ?></td>
 				<?php endif; ?>
 					<td><?php e($record->apellido.' '.$record->nombre) ?></td>
-					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/entrevistar/'.$record->entrevista_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn">Entrevistar >></a></td>
+					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/entrevistar/'.$record->entrevista_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-list-alt icon-white"></i> Entrevistar >></a></td>
+					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/riesgos/'.$record->tutorando_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-eye-open icon-white"></i> Ver riesgos >></a></td>
 				</tr>
 				<?php
 					endforeach;

@@ -66,19 +66,34 @@ class analisis extends Admin_Controller{
 	//--------------------------------------------------------------------
 
 	public function entrevistar($entrevista, $entrevistador, $entrevistado){
-		
+		//echo '<pre>'; print_r($preguntas = $this->entrevistas_model->find_preguntas($entrevista)); echo '</pre>'; exit;
+
+		$preguntas = $this->entrevistas_model->find_preguntas($entrevista);
+		//echo '<pre>'; print_r($preguntas); echo '</pre>'; exit;
+		if ($this->input->post('save')) {
+			//echo '<pre>'; print_r($this->input->post()); echo '</pre>'; exit;
+			foreach ($preguntas as $pregunta) {
+				if ($pregunta['pregunta_id'] == $this->input->post($pregunta['pregunta_id'])) {
+					if ($pregunta['tipo_respuesta_id'] == 1) {
+						$aux = array('repuesta_id' => $pregunta['pregunta_id'],
+									'tutorando_id' => $entrevistado,
+									 'tipo_respuesta_id' => $this->input->post($pregunta['pregunta_id']));
+						echo '<pre>'; print_r($aux); echo '</pre>'; exit;
+						$this->entrevistas_model->insert_respuesta($aux);
+					}
+				}	
+			}
+		}
 		// Se recupera los datos del tutor
 		$this->load->model('users/user_model');
-		$tutor = $this->user_model->find($entrevistador);
-
-		//echo '<pre>'; print_r($tutor); echo '</pre>'; exit;
-		// Datos del tutorando
 		$this->load->model('tutorandos/tutorandos_model');
-		$tutorando = $this->tutorandos_model->find($entrevistado);
-		echo '<pre>'; print_r($tutorando); echo '</pre>'; exit;
-
-		// Preguntas de la entrevista
-		$preguntas = $this->entrevistas_model->preguntas($entrevista);
+		
+		//echo '<pre>'; print_r($preguntas = $this->entrevistas_model->find_preguntas($entrevista)); echo '</pre>'; exit;
+		Template::set('tutor', $this->user_model->find($entrevistador));
+		Template::set('tutorando', $this->tutorandos_model->find($entrevistado));
+		Template::set('preguntas', $preguntas = $this->entrevistas_model->find_preguntas($entrevista));
+		Template::set('toolbar_title', 'Formulario de Entrevista');
+		Template::render();
 	}
 	/**
 	 * Creates a Entrevistas object.

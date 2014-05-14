@@ -4,7 +4,7 @@ class Tutorandos_model extends BF_Model {
 
 	protected $table_name	= "tutorandos";
 	protected $key			= "tutorando_id";
-	protected $soft_deletes	= true;
+	protected $soft_deletes	= false;
 	protected $date_format	= "datetime";
 
 	protected $log_user 	= FALSE;

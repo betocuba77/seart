@@ -4,7 +4,9 @@
 <p><br/><a href="http://seart.co/">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>
 
 <div id="login">
-	<center><h2><?php echo "SEART"; ?></h2></center>
+	<br><br>
+	<center><img src="http://seart.co/public/index.php/../assets/images/logo_solo.png" style="margin: -23px 0px 23px 0px" width="120" height="120"></center>
+	<center><h2><?php echo "SEART - UNJu"; ?></h2></center>
 	<h2><?php echo lang('us_login'); ?></h2>
 
 	<?php echo Template::message(); ?>
