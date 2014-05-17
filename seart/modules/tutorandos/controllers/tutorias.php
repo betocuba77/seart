@@ -6,8 +6,6 @@
 class tutorias extends Admin_Controller{
 
 	//--------------------------------------------------------------------
-
-
 	/**
 	 * Constructor
 	 *
@@ -36,8 +34,7 @@ class tutorias extends Admin_Controller{
 	 * @return void
 	 */
 	public function index($filter='all', $offset=0){
-
-		// Filters
+		// Filtros
 		if (preg_match('{first_letter-([A-Z])}', $filter, $matches)){
 			$filter_type = 'first_letter';
 			$first_letter = $matches[1];
@@ -62,7 +59,7 @@ class tutorias extends Admin_Controller{
 				break;
 
 			case 'all':
-				// Nothing to do
+				// NO hace nada
 				break;
 
 			default:
@@ -74,8 +71,9 @@ class tutorias extends Admin_Controller{
 
 		// Deleting anything?
 		if (isset($_POST['delete'])){
+			// Recibiendo los registros a borrar
 			$checked = $this->input->post('checked');
-
+			
 			if (is_array($checked) && count($checked)){
 				$result = FALSE;
 				foreach ($checked as $pid){
@@ -91,9 +89,9 @@ class tutorias extends Admin_Controller{
 		}
 
 		
-		// Pagination
+		// Paginacion
 		$this->load->library('pagination');
-		
+		// Total de tutorandos
 		$total_tutorandos = $this->tutorandos_model->count_all();
 
 		$this->pager['base_url'] = site_url(SITE_AREA ."/tutorias/tutorandos/index/$filter/");
@@ -115,18 +113,19 @@ class tutorias extends Admin_Controller{
 
 
 	/**
-	 * Creates a Tutorandos object.
+	 * Crea un objeto tutorando (Un nuevo tutorando)
 	 *
 	 * @return void
 	 */
 	public function create(){
+		// Control de permisos
 		$this->auth->restrict('Tutorandos.Tutorias.Create');
-
+		// cuando se reciben valores por POST
 		if (isset($_POST['save'])){
 			if ($insert_id = $this->save_tutorandos()){
-				// Log the activity
+				// Rigistrar la actividad
 				log_activity($this->current_user->id, lang('tutorandos_act_create_record') .': '. $insert_id .' : '. $this->input->ip_address(), 'tutorandos');
-
+				// preparar el mensaje a mostrar de exito y redirigir la pagina
 				Template::set_message(lang('tutorandos_create_success'), 'success');
 				redirect(SITE_AREA .'/tutorias/tutorandos');
 			} else {
@@ -135,11 +134,11 @@ class tutorias extends Admin_Controller{
 		}
 		Assets::add_module_js('tutorandos', 'tutorandos.js');
 		$this->load->model('carreras/carreras_model');		
-		
+	  
 		foreach ($this->carreras_model->find_all() as $value) {
 			$carreras[$value->plan_carrera_id] = $value->nombre.'  '.$value->anio_plan.' '.$value->version;
 		}		
-				
+		//echo '<pre>'; print_r($carreras); echo '</pre>'; exit;
 		Template::set('tutores', $this->tutorandos_model->find_all_tutores());
 		Template::set('carreras', $carreras );		
 		Template::set('provincias', $this->tutorandos_model->find_all_by_tabla('provincias'));
@@ -160,8 +159,8 @@ class tutorias extends Admin_Controller{
 	 *
 	 * @return void
 	 */
-	public function edit() {
-		$id = $this->uri->segment(5);
+	public function edit($id) {
+		//$id = $this->uri->segment(5);
 
 		if (empty($id)) {
 			Template::set_message(lang('tutorandos_invalid_id'), 'error');
@@ -193,32 +192,22 @@ class tutorias extends Admin_Controller{
 				Template::set_message(lang('tutorandos_delete_failure') . $this->tutorandos_model->error, 'error');
 			}
 		}
-		$this->load->model('carreras/carreras_model');		
-		
-		foreach ($this->carreras_model->find_all() as $value) {
-			$carreras[$value->plan_carrera_id] = $value->nombre;
-		}		
-
-		//echo '<pre>'; print_r($this->carreras_model->find_all()); echo '</pre>'; exit;
-		foreach ($this->carreras_model->find_all_planes() as $value) {
-			$planes[$value->plan_id] = $value->anio_plan.' '.$value->version;
-		}
+		$this->load->model('carreras/carreras_model');				
 
 		foreach ($this->carreras_model->find_all() as $value) {
 			$carreras[$value->plan_carrera_id] = $value->nombre.'  '.$value->anio_plan.' '.$value->version;
 		}		
-
 		
 		Template::set('tutores', $this->tutorandos_model->find_all_tutores());
 		Template::set('carreras', $carreras );
-		Template::set('planes', $planes);
+		
 		Template::set('provincias', $this->tutorandos_model->find_all_by_tabla('provincias'));
 		Template::set('localidades', $this->tutorandos_model->find_all_by_tabla('localidades'));
 		Template::set('departamentos', $this->tutorandos_model->find_all_by_tabla('departamentos'));
 		Template::set('paises', $this->tutorandos_model->find_all_by_tabla('paises'));
 		Template::set('barrios', $this->tutorandos_model->find_all_by_tabla('barrios'));
 
-		Template::set('tutorandos', $this->tutorandos_model->find($id));
+		Template::set('tutorandos', $this->tutorandos_model->find($id));			
 		Template::set('toolbar_title', lang('tutorandos_edit') .' Tutorandos');
 		Template::render();
 	}
@@ -245,22 +234,22 @@ class tutorias extends Admin_Controller{
 		// make sure we only pass in the fields we want
 		
 		$data = array();
-		$data['nombre']        = $this->input->post('tutorandos_nombre');
-		$data['apellido']        = $this->input->post('tutorandos_apellido');
-		$data['dni']        = $this->input->post('tutorandos_dni');
-		$data['fecha_nacimiento']        = $this->input->post('tutorandos_fecha_nacimiento') ? $this->input->post('tutorandos_fecha_nacimiento') : '0000-00-00';
-		$data['sexo']        = $this->input->post('tutorandos_sexo');
-		$data['telefono_fijo']        = $this->input->post('tutorandos_telefono_fijo');
-		$data['telefono_movil']        = $this->input->post('tutorandos_telefono_movil');
-		$data['email']        = $this->input->post('tutorandos_email');
+		$data['nombre']        = $this->input->post('nombre');
+		$data['apellido']        = $this->input->post('apellido');
+		$data['dni']        = $this->input->post('dni');
+		$data['fecha_nacimiento']        = $this->input->post('fecha_nacimiento') ? $this->input->post('fecha_nacimiento') : '0000-00-00';
+		$data['sexo']        = $this->input->post('sexo');
+		$data['telefono_fijo']        = $this->input->post('telefono_fijo');
+		$data['telefono_movil']        = $this->input->post('telefono_movil');
+		$data['email']        = $this->input->post('email');
 
 		// Datos de domicilio
 		$domicilio['calle']        = $this->input->post('calle');
-		$domicilio['barrio_id']        = $this->input->post('barrio');
-		$domicilio['localidad_id']        = $this->input->post('localidad');
-		$domicilio['departamento_id']        = $this->input->post('departamento');
-		$domicilio['provincia_id']        = $this->input->post('provincia');
-		$domicilio['pais_id']        = $this->input->post('pais');
+		$domicilio['barrio_id']        = $this->input->post('barrio_id');
+		$domicilio['localidad_id']        = $this->input->post('localidad_id');
+		$domicilio['departamento_id']        = $this->input->post('departamento_id');
+		$domicilio['provincia_id']        = $this->input->post('provincia_id');
+		$domicilio['pais_id']        = $this->input->post('pais_id');
 
 		// Datos universitarios
 		$data['carrera_id']        = $this->input->post('carrera_id');
@@ -278,7 +267,7 @@ class tutorias extends Admin_Controller{
 		if ($type == 'insert'){
 			$id = $this->tutorandos_model->insert($data, $domicilio);
 
-			if (is_numeric($id)){
+			if ($id){
 				$return = $id;
 			} else {
 				$return = FALSE;

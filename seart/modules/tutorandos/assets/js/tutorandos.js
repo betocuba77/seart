@@ -1,1 +1,1 @@
-$('#tutorandos_fecha_nacimiento').datepicker({ dateFormat: 'yy-mm-dd'});
+$('#fecha_nacimiento').datepicker({ dateFormat: 'yy-mm-dd'});

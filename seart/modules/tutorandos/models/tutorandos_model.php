@@ -49,58 +49,58 @@ class Tutorandos_model extends BF_Model {
 	 */
 	protected $validation_rules 		= array(
 		array(
-			"field"		=> "tutorandos_nombre",
+			"field"		=> "nombre",
 			"label"		=> "Nombres",
 			"rules"		=> "required|max_length[60]"
 		),
 		array(
-			"field"		=> "tutorandos_apellido",
+			"field"		=> "apellido",
 			"label"		=> "Apellido",
 			"rules"		=> "required|max_length[60]"
 		),
 		array(
-			"field"		=> "tutorandos_dni",
+			"field"		=> "dni",
 			"label"		=> "DNI",
 			"rules"		=> "required|is_natural|max_length[8]"
 		),
 		array(
-			"field"		=> "tutorandos_fecha_nacimiento",
+			"field"		=> "fecha_nacimiento",
 			"label"		=> "Fecha de Nacimiento",
 			"rules"		=> "required"
 		),
 		array(
-			"field"		=> "tutorandos_sexo",
+			"field"		=> "sexo",
 			"label"		=> "Sexo",
-			"rules"		=> "required|max_length[1]"
+			"rules"		=> "max_length[1]"
 		),
 		array(
-			"field"		=> "tutorandos_telefono_fijo",
+			"field"		=> "telefono_fijo",
 			"label"		=> "Telefono Fijo",
 			"rules"		=> "max_length[10]"
 		),
 		array(
-			"field"		=> "tutorandos_telefono_movil",
+			"field"		=> "telefono_movil",
 			"label"		=> "Telefono Movil",
 			"rules"		=> "max_length[10]"
 		),
 		array(
-			"field"		=> "tutorandos_email",
+			"field"		=> "email",
 			"label"		=> "Correo Electronico",
 			"rules"		=> "required|valid_email|max_length[100]"
 		),
 		array(
 			"field"		=> "calle",
 			"label"		=> "Calle",
-			"rules"		=> "required|max_length[150]"
+			"rules"		=> "required"
 		),		
 		array(
-			"field"		=> "tutorandos_lu",
+			"field"		=> "lu",
 			"label"		=> "LU",
-			"rules"		=> "max_length[10]"
+			"rules"		=> "required|max_length[10]"
 		),
 		array(
 			"field"		=> "anio_ingreso",
-			"label"		=> "Ingreso",
+			"label"		=> "Año de Ingreso",
 			"rules"		=> "required|max_length[4]"
 		),
 		array(
@@ -116,13 +116,14 @@ class Tutorandos_model extends BF_Model {
 		array(
 			"field"		=> "anio_egreso",
 			"label"		=> "Año de Egreso",
-			"rules"		=> "required|max_length[150]"
+			"rules"		=> "required|max_length[4]"
 		),
 	);
 	protected $insert_validation_rules 	= array();
 	protected $skip_validation 			= FALSE;
 
 	//--------------------------------------------------------------------
+	// Consulta de todos los datos de los tutores
 	public function find_all_tutores(){
 		$query = $this->db->from('users')->where('role_id', 7)->get();
 		foreach ($query->result() as $row) {
@@ -130,25 +131,44 @@ class Tutorandos_model extends BF_Model {
 		}
 		return $tutor;
 	}
+	
+	// Consulta de los datos seleccionados de todos los tutorandos
 	public function find_all(){			
 		$this->db->select('tutorando_id, tutorandos.nombre, apellido, telefono_movil, tutorandos.email as correo, surname, id');
 		$this->db->from('users');
-		$query = $this->db->join('tutorandos','users.id = tutorandos.tutor_id')->get();
+		$query = $this->db->join('tutorandos','users.id = tutorandos.tutor_id','inner')->get();
 		
 		return $query->result();
 	}
-
-	// Consulta para recuperar datos que se establecen como valores fijos
+	
+	// Consulta de los datos de un tutorando
+	public function find($id){
+		// Seleccion de elementos a recuperar
+		$this->db->select('*');
+		// Union de las tablas tutorandos y domicilios
+		$this->db->from('tutorandos');
+		$this->db->where('tutorandos.tutorando_id', $id);
+		$query = $this->db->join('domicilios','tutorandos.tutorando_id = domicilios.persona_id', 'inner')->get();
+		if($query->num_rows()>0){
+			return $query->result();
+		} else {
+			return FALSE;
+		}
+	}
+	// Consulta de datos de diferentes tablas, la cual el nombre de cada tabla se recibe como parametro
+	// Se retorna un arreglo asociativo de clave => valor
 	public function find_all_by_tabla($valor){
+		
 		$query = $this->db->get($valor);
 		foreach ($query->result() as $value) {
 			$arreglo[$value->id] = $value->nombre;
 		}		
 		return $arreglo;
 	}
-
-	public function insert($data, $datos_domicilio){
-		//echo '<pre>'; print_r($domicilio); echo '</pre>'; exit;
+	
+	// Insertar datos del tutorando en conjunto con sus datos de domicilio
+	public function insert($data, $datos_domicilio){		
+		
 		$id = parent::insert($data);
 		$domicilio = array(
 				'persona_id' => $id,
@@ -159,8 +179,36 @@ class Tutorandos_model extends BF_Model {
 				'provincia_id' => $datos_domicilio['provincia_id'],
 				'pais_id' => $datos_domicilio['pais_id']
 			);		
-
-		$id = $this->db->insert('domicilios', $domicilio);
+		
+		$id = $this->db->insert('domicilios', $domicilio);		
 		return $id;
+	}
+	
+	// Actualiza datos
+	public function update($id, $data, $datos_domicilio){
+		// Actualizamos los datos de domicilio
+		$domicilio = array(
+				'persona_id' => $id,
+				'calle' => $datos_domicilio['calle'],
+				'barrio_id' => $datos_domicilio['barrio_id'],
+				'localidad_id' => $datos_domicilio['localidad_id'],
+				'departamento_id' => $datos_domicilio['departamento_id'],
+				'provincia_id' => $datos_domicilio['provincia_id'],
+				'pais_id' => $datos_domicilio['pais_id']
+			);	
+		$this->db->update('domicilios', $domicilio, array('persona_id' => $id));
+		
+		// actualizamos los datos personales
+		$this->db->where('tutorando_id', $id);
+		return $this->db->update($this->table_name, $data);
+	}
+	
+	// Borrar los datos del tutorando en conjunto con los de domicilio
+	public function delete($id){
+		// Borra el registro domicilio del tutorando
+		$this->db->delete('domicilios', array('persona_id' => $id));
+		
+		// Borra los datos del tutorando
+		return parent::delete($id);
 	}
 }
