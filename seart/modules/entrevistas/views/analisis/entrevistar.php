@@ -24,12 +24,12 @@
 				<td><?= $tutorando[0]->fecha_nacimiento ?></td>
 			</tr>
 			<tr>
-				<th>Telefono/s: </th>
-				<td><?= $tutorando[0]->telefono_movil ?></td>				
+				<th>Telefono Fijo: </th>
+				<td><?= $tutorando[0]->telefono_fijo ?></td>				
 			</tr>
 			<tr>
-				<th>Teléfono: </th>
-				<td><?= $tutorando->telefono_movil ?></td>
+				<th>Teléfono Movil: </th>
+				<td><?= $tutorando[0]->telefono_movil ?></td>
 			</tr>
 			<tr>
 				<th>E-mail</th>

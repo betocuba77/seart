@@ -9,32 +9,61 @@
 				<th colspan="2">TUTOR RESPONSABLE</th>
 			</tr>
 			<tr>
-				<th>Apellido y Nombre: Cuba Beto</th>
+				<th><?= $tutor->surname.' '.$tutor->name ?></th>
 			</tr>
 			<tr>
 				<th th colspan="2">TUTORANDO</th>				
 			</tr>
 			<tr>
-				<th>Apellido y Nombre: Suárez Raúl</th>
+				<th><?= $tutorando[0]->apellido.' '.$tutorando[0]->nombre ?></th>
 			</tr>
 		</table><br>
 			<ul>
-				<li>RIESGO VOCACIONAL 3: Se ha detectado que la elección de la carrera no fue propia, sino que existen presiones familiares.</li>				
-			</ul>
-			<ul>	
-				<li>RIESGO ACADÉMICO 2: Se ha detectado que el alumno no posee hábito, disciplina o técnica de estudio.</li>
-				<li>RIESGO ACADÉMICO 3: Se ha detectado que el alumno no posee un grupo de estudio.</li>
-			</ul>
-			<ul>	
-				<li>RIESGO ECONÓMICO 1: Se ha detectado que el alumno tiene poco ingreso y depende de la beca para continuar sus estudios.</li>
-			</ul>
-			<ul>	
-				<li>RIESGO PERSONAL 1: Se ha detectado que el alumno tiene personas a cargo.</li>
-				<li>RIESGO PERSONAL 3: Se ha detectado que el alumno dedica más tiempo a otras actividades secundarias.</li>				
-			</ul>
-			<ul>	
-				<li>RIESGO INSTITUCIONAL 2: Se ha detectado que alumno tiene problemas con la conexión al WiFi.</li>
-			</ul>
+				<br><li>RIESGO VOCACIONAL</li>
+				<?php if (empty($resultados['vocacional'])) {
+					echo "No posee Riesgo vocacional";
+				} else {
+					echo 'Posee Riesgo Vocacional: ';
+					echo '<ul>';
+					foreach ($resultados['vocacional'] as $key => $value) {
+						echo '<li>'.$value.'</li>';
+					}
+					echo '</ul>';
+				} ?>
+				<br><li>RIESGO ACADEMICO</li>
+				<?php if (empty($resultados['academico'])) {
+					echo "No posee Riesgo academico";
+				} else {
+					echo 'Posee Riesgo Acad&eacute;mico: ';
+					echo '<ul>';
+					foreach ($resultados['academico'] as $key => $value) {
+						echo '<li>'.$value.'</li>';
+					}
+					echo '</ul>';
+				} ?>
+				<br><li>RIESGO ECONOMICO</li>
+				<?php if (empty($resultados['economico'])) {
+					echo "No posee Riesgo economico";
+				} else {
+					echo 'Posee Riesgo Econ&oacute;mico: ';
+					echo '<ul>';
+					foreach ($resultados['economico'] as $key => $value) {
+						echo '<li>'.$value.'</li>';
+					}
+					echo '</ul>';
+				} ?>
+				<br><br><li>RIESGO PERSONAL</li>
+				<?php if (empty($resultados['personal'])) {
+					echo "No posee Riesgo personal";
+				} else {
+					echo 'Posee Riesgo Personal: ';
+					echo '<ul>';
+					foreach ($resultados['personal'] as $key => $value) {
+						echo '<li>'.$value.'</li>';
+					}
+					echo '</ul>';
+				} ?>
+			</ul>						
 	</fieldset>
 	<div class="form-actions">
 		<input type="submit" name="save" class="btn btn-success" value="<< Ver anterior"  />

@@ -59,7 +59,7 @@ class analisis extends Admin_Controller{
 		$records = $this->entrevistas_model->find_all_tutorandos($id);
 
 		Template::set('records', $records);
-		Template::set('toolbar_title', 'Manage Entrevistas');
+		Template::set('toolbar_title', 'Gestion de Entrevistas');
 		Template::render();
 	}
 
@@ -72,7 +72,7 @@ class analisis extends Admin_Controller{
 		//echo '<pre>'; print_r($preguntas); echo '</pre>'; exit;
 		if ($this->input->post('save')) {
 			//echo '<pre>'; print_r($this->input->post()); echo '</pre>'; exit;
-			if ($this->save_entrevista($entrevistado)) {
+			if ($this->save_entrevista($entrevistador, $entrevistado)) {
 				Template::set_message('Respuesta registradas con exito', 'success');
 				redirect(SITE_AREA .'/analisis/entrevistas');
 			} else {
@@ -92,8 +92,16 @@ class analisis extends Admin_Controller{
 	}
 	//--------------------------------------------------------------------
 
-	public function riesgos($entrevistado){
-		
+	public function riesgos($entrevistador , $entrevistado){
+		$this->load->model('users/user_model');
+		$this->load->model('tutorandos/tutorandos_model');
+
+		Template::set('resultados', $this->entrevistas_model->analisis_riesgos($entrevistado));
+		Template::set('tutor', $this->user_model->find($entrevistador));
+		Template::set('tutorando', $this->tutorandos_model->find($entrevistado));
+		//echo '<pre>'; print_r($this->user_model->find($entrevistador)); echo '</pre>'; exit;
+		Template::set('toolbar_title', 'An&aacute;lisis de Riesgos');
+		Template::render();
 	}
 	//--------------------------------------------------------------------
 	// !PRIVATE METHODS
