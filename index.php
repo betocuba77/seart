@@ -20,7 +20,7 @@
             <h1>Bienvenido a SEART - UNJu</h1>
             <h2><center>Sistema Experto para al Análisis de Riesgos en Tutorías.</center></h2>
             <div class="continue">
-                <a class="btn btn-primary" href="http://seart.co/public/index.php/login"><i class= "icon-user icon-white"></i> Ingrese aquí &raquo;</a>
+                <a class="btn btn-primary" href="http://seart.co/public/index.php/login" target="_self"><i class= "icon-user icon-white"></i> Ingrese aquí &raquo;</a>
             </div>
         </div>
 
