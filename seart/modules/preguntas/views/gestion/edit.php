@@ -19,13 +19,13 @@ $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
 			</div>
 
 			<?php // Change the values in this array to populate your dropdown as required
-				$factores = array( 1 => 'Vocacional', 2 => 'Academico', 3 => 'Economico', 4 => 'Personal');
+				$factores = array( 1 => 'Vocacional', 2 => 'Académico', 3 => 'Económico', 4 => 'Personal');
 				echo form_dropdown('preguntas_factor', $factores, set_value('preguntas_factor', isset($preguntas['factor']) ? $preguntas['factor'] : ''), 'Factor');
 			?>
 
 			<?php $i = 0;  foreach ($respuestas as $respuesta) { ?>
 				<div class="control-group">
-					<label class="control-label">Opcion de respuesta: <?= ++$i ?> </label>
+					<label class="control-label">Opción de respuesta: <?= ++$i ?> </label>
 					<div class="controls">
 						<input style="width:60%" type="text" name="respuestas[<?=  $respuesta->tipo_respuesta_id ?>]" value="<?= $respuesta->descripcion ?>">
 					</div>

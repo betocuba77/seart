@@ -16,8 +16,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<th class="column-check"><input class="check-all" type="checkbox" /></th>
 					<?php endif;?>
 					<th>ID</th>
-					<th>Entrevistador</th>
-					<th>Entrevistado</th>
+					<th>Tutor - Entrevistador</th>
+					<th>Tutorando - Entrevistado</th>
 					<th>Fecha</th>
 				</tr>
 			</thead>
@@ -48,8 +48,8 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				<?php else : ?>
 					<td><?php e($record->entrevista_id); ?></td>
 				<?php endif; ?>
-					<td><?php e($record->surname.' '.$record->name); ?></td>
-					<td><?php e($record->apellido).' '.e($record->apellido) ?></td>
+					<td><?php e($record->name.' '.$record->surname); ?></td>
+					<td><?php e($record->nombre).' '.e($record->apellido) ?></td>
 					<td><?php e($record->fecha) ?></td>
 				</tr>
 				<?php

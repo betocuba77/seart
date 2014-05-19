@@ -49,7 +49,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<td>
 						<?php switch ($record->factor) {
 							case 1 : echo 'Vocacional'; break;
-							case 2 : echo 'Academico'; break;
+							case 2 : echo 'Académico'; break;
 							case 3 : echo 'Económico'; break;
 							case 4 : echo 'Personal'; break;
 						} 

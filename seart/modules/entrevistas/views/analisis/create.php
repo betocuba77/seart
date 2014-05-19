@@ -49,7 +49,7 @@ $id = isset($entrevistas['entrevista_id']) ? $entrevistas['entrevista_id'] : '';
 			</div>
 
 			<div class="form-actions">
-				<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_create'); ?>"  />
+				<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_crear'); ?>"  />
 				<?php echo lang('bf_or'); ?>
 				<?php echo anchor(SITE_AREA .'/analisis/entrevistas', lang('entrevistas_cancel'), 'class="btn btn-warning"'); ?>
 				

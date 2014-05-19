@@ -7,9 +7,10 @@ $lang['settings_saved_success']     = 'Su configuración fue guardada correctame
 $lang['settings_error_success']     = 'Hubo un error guardando su configuración.';
 
 
-// $lang['set_tab_settings']			= 'Main Settings';
-// $lang['set_tab_security']			= 'Security Settings';
-// $lang['set_tab_developer']			= 'Developer Settings';
+$lang['set_tab_settings']			= 'Configuración Principal';
+$lang['set_tab_security']			= 'Configuración Seguridad';
+$lang['set_tab_developer']			= 'Configuración Desarrollo';
+$lang['set_tab_extended']			= 'Configuración Extensiones';
 // 
-// $lang['set_option_password']		= 'Password Options';
-// $lang['set_option_developer']		= 'Developer Options';
+$lang['set_option_password']		= 'Opciones Contraseñas';
+$lang['set_option_developer']		= 'Opciones Desarrollo';

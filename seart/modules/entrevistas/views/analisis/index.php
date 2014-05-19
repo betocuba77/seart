@@ -47,7 +47,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 				<?php endif; ?>
 					<td><?php e($record->apellido.' '.$record->nombre) ?></td>
 					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/entrevistar/'.$record->entrevista_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-list-alt icon-white"></i> Entrevistar >></a></td>
-					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/riesgos/'.$record->tutorando_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-eye-open icon-white"></i> Ver riesgos >></a></td>
+					<td><a href="http://seart.co/public/index.php/admin/analisis/entrevistas/riesgos" class="btn btn-primary"><i class= "icon-eye-open icon-white"></i> Ver riesgos >></a></td>
 				</tr>
 				<?php
 					endforeach;

@@ -20,11 +20,11 @@
 				<td><?= $tutorando->apellido.' '.$tutorando->nombre ?></td>
 			</tr>
 			<tr>
-				<th>Edad</th>
+				<th>Fecha de nacimiento: </th>
 				<td><?= $tutorando->fecha_nacimiento ?></td>
 			</tr>
 			<tr>
-				<th>Telefono/s: </th>
+				<th>Teléfono: </th>
 				<td><?= $tutorando->telefono_movil ?></td>
 			</tr>
 			<tr>
@@ -32,11 +32,10 @@
 				<td><?= $tutorando->email ?></td>
 			</tr>
 			<tr>
-				<th>DATOS ACADEMICOS</th>				
+				<th>DATOS ACADÉMICOS</th>				
 			</tr>
 			<tr>
 				<th>Carrera:</th>
-				<td></td>
 			</tr>
 			<tr>
 				<th>Colegio Secundario:</th>
@@ -47,7 +46,7 @@
 				<td><?= $tutorando->anio_egreso ?></td>
 			</tr>
 			<tr>
-				<th>Orientacion del Titulo</th>
+				<th>Orientación del Titulo</th>
 				<td><?= $tutorando->orientacion ?></td>
 			</tr>
 		</table>
@@ -60,7 +59,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:98%"></textarea>
+				<textarea name="" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -80,7 +79,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:98%"></textarea>
+				<textarea name="" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -100,7 +99,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:98%"></textarea>
+				<textarea name="" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -120,7 +119,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:98%"></textarea>
+				<textarea name="" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -139,7 +138,7 @@
 		} ?>		
 	</fieldset>
 	<div class="form-actions">
-		<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_create'); ?>"  />
+		<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_edit'); ?>"  />
 		<?php echo lang('bf_or'); ?>
 		<?php echo anchor(SITE_AREA .'/analisis/entrevistas', lang('entrevistas_cancel'), 'class="btn btn-warning"'); ?>
 	</div>
