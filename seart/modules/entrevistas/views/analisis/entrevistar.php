@@ -17,37 +17,42 @@
 			</tr>
 			<tr>
 				<th>Apellido y Nombre</th>
-				<td><?= $tutorando->apellido.' '.$tutorando->nombre ?></td>
+				<td><?= $tutorando[0]->apellido.' '.$tutorando[0]->nombre ?></td>
 			</tr>
 			<tr>
-				<th>Fecha de nacimiento: </th>
-				<td><?= $tutorando->fecha_nacimiento ?></td>
+				<th>Edad</th>
+				<td><?= $tutorando[0]->fecha_nacimiento ?></td>
 			</tr>
 			<tr>
-				<th>Teléfono: </th>
-				<td><?= $tutorando->telefono_movil ?></td>
+				<th>Telefono Fijo: </th>
+				<td><?= $tutorando[0]->telefono_fijo ?></td>				
+			</tr>
+			<tr>
+				<th>Teléfono Movil: </th>
+				<td><?= $tutorando[0]->telefono_movil ?></td>
 			</tr>
 			<tr>
 				<th>E-mail</th>
-				<td><?= $tutorando->email ?></td>
+				<td><?= $tutorando[0]->email ?></td>
 			</tr>
 			<tr>
 				<th>DATOS ACADÉMICOS</th>				
 			</tr>
 			<tr>
 				<th>Carrera:</th>
+				<td><?= $tutorando[0]->carrera_nombre ?></td>
 			</tr>
 			<tr>
 				<th>Colegio Secundario:</th>
-				<td><?= $tutorando->colegio_secundario ?></td>
+				<td><?= $tutorando[0]->colegio_secundario ?></td>
 			</tr>
 			<tr>
 				<th>Año de Egreso</th>
-				<td><?= $tutorando->anio_egreso ?></td>
+				<td><?= $tutorando[0]->anio_egreso ?></td>
 			</tr>
 			<tr>
-				<th>Orientación del Titulo</th>
-				<td><?= $tutorando->orientacion ?></td>
+				<th>Orientacion del Titulo</th>
+				<td><?= $tutorando[0]->orientacion ?></td>				
 			</tr>
 		</table>
 	</fieldset>
@@ -59,17 +64,17 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:50%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="radio" name="<?php echo $pregunta['pregunta_id'] ?>" value="<?= $respuesta->tipo_respuesta_id ?>" /></li><br>	
+							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				} elseif($pregunta['tipo_respuesta'] == 2) { // Si las respuestas son de opcion 2
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) {
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="checkbox" name="<?php echo $pregunta['pregunta_id'].'['.$respuesta->tipo_respuesta_id.']'; ?>" /></li><br>	
+							<input type="checkbox" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				}
@@ -79,17 +84,18 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:50%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>" value="<?= $respuesta->tipo_respuesta_id ?>" /></li><br>	
+							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				} elseif($pregunta['tipo_respuesta'] == 2) { // Si las respuestas son de opcion 2
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) {
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="checkbox" name="<?php echo $pregunta['pregunta_id'].'['.$respuesta->tipo_respuesta_id.']'; ?>" /></li><br>	
+							<input type="checkbox" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				}
@@ -99,17 +105,17 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:50%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>" value="<?= $respuesta->tipo_respuesta_id ?>" /></li><br>	
+							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				} elseif($pregunta['tipo_respuesta'] == 2) { // Si las respuestas son de opcion 2
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) {
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="checkbox" name="<?php echo $pregunta['pregunta_id'].'['.$respuesta->tipo_respuesta_id.']'; ?>" /></li><br>	
+							<input type="checkbox" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				}
@@ -119,17 +125,17 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="" style="width:50%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>" value="<?= $respuesta->tipo_respuesta_id ?>" /></li><br>	
+							<input type="radio" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				} elseif($pregunta['tipo_respuesta'] == 2) { // Si las respuestas son de opcion 2
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) {
 						echo '<li>'.$respuesta->tdescripcion; ?>
-							<input type="checkbox" name="<?php echo $pregunta['pregunta_id'].'['.$respuesta->tipo_respuesta_id.']'; ?>" /></li><br>	
+							<input type="checkbox" name="<?php echo $pregunta['pregunta_id']; ?>[]" value="<?= $respuesta->tipo_pregunta_id ?>" /></li><br>	
 						<?php
 					}
 				}
@@ -138,7 +144,7 @@
 		} ?>		
 	</fieldset>
 	<div class="form-actions">
-		<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_edit'); ?>"  />
+		<input type="submit" name="save" class="btn btn-primary" value="Guardar Entrevista"  />
 		<?php echo lang('bf_or'); ?>
 		<?php echo anchor(SITE_AREA .'/analisis/entrevistas', lang('entrevistas_cancel'), 'class="btn btn-warning"'); ?>
 	</div>

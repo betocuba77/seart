@@ -144,11 +144,15 @@ class Tutorandos_model extends BF_Model {
 	// Consulta de los datos de un tutorando
 	public function find($id){
 		// Seleccion de elementos a recuperar
-		$this->db->select('*');
-		// Union de las tablas tutorandos y domicilios
+		$this->db->select('tutorandos.nombre, apellido, fecha_nacimiento, dni, telefono_movil, telefono_fijo, email, carreras.nombre as carrera_nombre,
+			colegio_secundario, anio_egreso, orientacion, tutorando_id, tutorandos.lu, anio_ingreso, anio_egreso, calle' );
+		
 		$this->db->from('tutorandos');
 		$this->db->where('tutorandos.tutorando_id', $id);
-		$query = $this->db->join('domicilios','tutorandos.tutorando_id = domicilios.persona_id', 'inner')->get();
+		// Union de las tablas tutorandos y carreras
+		$this->db->join('carreras', 'carreras.carrera_id = tutorandos.carrera_id', 'left');
+		// Union de las tablas tutorandos y domicilios
+		$query = $this->db->join('domicilios','tutorandos.tutorando_id = domicilios.persona_id', 'left')->get();
 		if($query->num_rows()>0){
 			return $query->result();
 		} else {

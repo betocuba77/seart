@@ -13,7 +13,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 			<thead>
 				<tr>
 					<th>ID</th>					
-					<th>Tutorando</th>
+					<th>Mis Tutorandos</th>
 					<th>Realizar entrevista</th>
 					<th>Realizar análisis</th>
 				</tr>
@@ -41,13 +41,13 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<?php endif;?>
 					
 				<?php if ($can_edit) : ?>
-					<td><?php echo anchor(SITE_AREA . '/analisis/entrevistas/edit/' . $record->entrevista_id, '<span class="icon-pencil"></span>' .  $record->entrevista_id); ?></td>
+					<td><?php echo anchor(SITE_AREA . '/gestion/entrevistas/edit/' . $record->entrevista_id, '<span class="icon-pencil"></span>' .  $record->entrevista_id); ?></td>
 				<?php else : ?>
 					<td><?php e($record->entrevista_id); ?></td>
 				<?php endif; ?>
 					<td><?php e($record->apellido.' '.$record->nombre) ?></td>
 					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/entrevistar/'.$record->entrevista_id.'/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-list-alt icon-white"></i> Entrevistar >></a></td>
-					<td><a href="http://seart.co/public/index.php/admin/analisis/entrevistas/riesgos" class="btn btn-primary"><i class= "icon-eye-open icon-white"></i> Ver riesgos >></a></td>
+					<td><a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/riesgos/'.$record->id.'/'.$record->tutorando_id; ?>" class="btn btn-primary"><i class= "icon-eye-open icon-white"></i> Ver riesgos >></a></td>
 				</tr>
 				<?php
 					endforeach;

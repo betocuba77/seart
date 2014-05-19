@@ -81,7 +81,7 @@ class Preguntas_model extends BF_Model {
 	}
 
 	public function find_respuestas($id){
-		$query = $this->db->from('tipos_respuesta')->where('pregunta_id', $id)->get();
+		$query = $this->db->from('tipos_pregunta')->where('pregunta_id', $id)->get();
 		if ($query->num_rows()> 0) {
 			return $query->result();
 		} else {

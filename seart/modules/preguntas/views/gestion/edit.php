@@ -27,7 +27,7 @@ $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
 				<div class="control-group">
 					<label class="control-label">Opción de respuesta: <?= ++$i ?> </label>
 					<div class="controls">
-						<input style="width:60%" type="text" name="respuestas[<?=  $respuesta->tipo_respuesta_id ?>]" value="<?= $respuesta->descripcion ?>">
+						<input style="width:60%" type="text" name="respuestas[<?=  $respuesta->tipo_pregunta_id ?>]" value="<?= $respuesta->descripcion ?>">
 					</div>
 				</div>		
 			<?php }	?>

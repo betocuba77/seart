@@ -102,7 +102,7 @@ class Entrevistas_model extends BF_Model {
 				'tipo_respuesta' => $pregunta->tipo_respuesta,
 				'pdescripcion' => $pregunta->pdescripcion,
 				'pregunta_id' => $pregunta->pregunta_id,
-				'tipos_respuesta' => $this->db->select('tipos_respuesta.tipo_respuesta_id, tipos_respuesta.descripcion as tdescripcion')->from('tipos_respuesta')->where('tipos_respuesta.pregunta_id',$pregunta->pregunta_id)->get()->result()
+				'tipos_respuesta' => $this->db->select('tipos_pregunta.tipo_pregunta_id, tipos_pregunta.descripcion as tdescripcion')->from('tipos_pregunta')->where('tipos_pregunta.pregunta_id',$pregunta->pregunta_id)->get()->result()
 				);
 			}
 		}
@@ -110,7 +110,70 @@ class Entrevistas_model extends BF_Model {
 		return $preguntas;
 	}
 
-	public function insert_respuesta($array){
+	// Se guardan las respuesta en crudo de cada pregunta segun el tutorandos
+	public function insert_respuesta_crudo($array){
+		return $this->db->insert('respuestas', $array);
+	}
+
+	// Se guardan las opciones seleccionadas de cada pregunta
+	public function insert_respuesta_opciones($array){
+		return $this->db->insert('tipos_respuesta', $array);
+	}
+
+	// Funcion que devuleve los riegos de cada pregunta echa  a los tutorandos
+	public function analisis_riesgos($entrevistado){
+		// Recuperando las respuestas de las entrevistas de cada entrevistado				
+		$this->db->from('preguntas');
+		$this->db->where('tipos_respuesta.tutorando_id', $entrevistado);
+		$query = $this->db->join('tipos_respuesta', 'tipos_respuesta.respuesta_id = preguntas.pregunta_id', 'inner')->get();
 		
+		$academico = $vocacional = $economico = $personal = array();
+		foreach ($query->result() as $value) {			
+			
+			if ($value->factor == 1) { // 1 - VOCACIONAL
+				if ($this->tiene_riesgo($value->tipo_respuesta_id)) {					
+					$vocacional[$value->tipo_respuesta_id] = $this->texto_respuesta($value->tipo_respuesta_id);
+				}							
+			} elseif ($value->factor == 2) { // 2 - ACADEMICO
+				if ($this->tiene_riesgo($value->tipo_respuesta_id)) {					
+					$academico[$value->tipo_respuesta_id] = $this->texto_respuesta($value->tipo_respuesta_id);
+				}								
+			} elseif ($value->factor == 3) { // 3 - ECONOMICO
+				if ($this->tiene_riesgo($value->tipo_respuesta_id)) {					
+					$economico[$value->tipo_respuesta_id] = $this->texto_respuesta($value->tipo_respuesta_id);
+				}							
+			} elseif ($value->factor == 4) { // 4 - PERSONAL
+				if ($this->tiene_riesgo($value->tipo_respuesta_id)) {					
+					$personal[$value->tipo_respuesta_id] = $this->texto_respuesta($value->tipo_respuesta_id);
+				}							
+			}			
+		}
+		$respuestas = array('vocacional' => $vocacional,
+							'academico' => $academico,
+							'economico' => $economico,
+							'personal' => $personal );
+
+		//echo '<pre>'; print_r($respuestas); echo '</pre>'; exit;	
+		return $respuestas;
+
+	}
+
+	private function tiene_riesgo($tipo_respuesta_id){		
+		$this->db->where('tipo_pregunta_id', $tipo_respuesta_id);
+		$this->db->where('riesgo', 1);
+		$query = $this->db->from('tipos_pregunta')->get();
+		if ($query->num_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	private function texto_respuesta($id){
+		$query = $this->db->from('tipos_pregunta')->where('tipo_pregunta_id', $id)->get();
+		if ($query->num_rows() > 0 ) {
+			$row = $query->row();
+			return $row->descripcion;
+		}
 	}
 }
