@@ -1,6 +1,7 @@
 <?php
-    $install_url = 'http'.((empty($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off')?'':'s') .'://'. $_SERVER['SERVER_NAME'] .'/public/';
-?><!DOCTYPE html>
+    $install_url = 'http'.((empty($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off')?'':'s') .'://'. $_SERVER['SERVER_NAME'] .'/public/';    
+?>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
