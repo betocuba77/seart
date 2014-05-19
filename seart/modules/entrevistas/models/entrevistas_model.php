@@ -102,7 +102,7 @@ class Entrevistas_model extends BF_Model {
 				'tipo_respuesta' => $pregunta->tipo_respuesta,
 				'pdescripcion' => $pregunta->pdescripcion,
 				'pregunta_id' => $pregunta->pregunta_id,
-				'tipos_respuesta' => $this->db->select('tipos_respuesta.tipo_respuesta_id, tipos_respuesta.descripcion as tdescripcion')->from('tipos_respuesta')->where('tipos_respuesta.pregunta_id',$pregunta->pregunta_id)->get()->result()
+				'tipos_respuesta' => $this->db->select('tipos_pregunta.tipo_pregunta_id, tipos_pregunta.descripcion as tdescripcion')->from('tipos_pregunta')->where('tipos_pregunta.pregunta_id',$pregunta->pregunta_id)->get()->result()
 				);
 			}
 		}
@@ -110,7 +110,13 @@ class Entrevistas_model extends BF_Model {
 		return $preguntas;
 	}
 
-	public function insert_respuesta($array){
-		
+	// Se guardan las respuesta en crudo de cada pregunta segun el tutorandos
+	public function insert_respuesta_crudo($array){
+		return $this->db->insert('respuestas', $array);
+	}
+
+	// Se guardan las opciones seleccionadas de cada pregunta
+	public function insert_respuesta_opciones($array){
+		return $this->db->insert('tipos_respuesta', $array);
 	}
 }
