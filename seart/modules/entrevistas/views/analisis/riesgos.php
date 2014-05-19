@@ -3,43 +3,42 @@
 	<fieldset>
 		<table class="table table-condensed">
 			<tr>
-				<th colspan="2" style='align:center'>1er ENCUENTRO 2014</th>
+				<th colspan="2" style='align:center'>RIESGOS DETECTADOS POR TUTORANDO</th>
 			</tr>
 			<tr>
 				<th colspan="2">TUTOR RESPONSABLE</th>
 			</tr>
 			<tr>
-				<th>Apellido y Nombre</th>
-				<td><?= $tutor->surname.' '.$tutor->name ?></td>
+				<th>Apellido y Nombre: Cuba Beto</th>
 			</tr>
 			<tr>
-				<th th colspan="2">DATOS PERSONALES DEL TUTORANDO</th>				
+				<th th colspan="2">TUTORANDO</th>				
 			</tr>
 			<tr>
-				<th th colspan="2">RIESGOS DETECTADOS</th>				
+				<th>Apellido y Nombre: Suárez Raúl</th>
 			</tr>
-			<tr>
-				<th>Vocacional</th>
-				<td><?= $tutorando->apellido.' '.$tutorando->nombre ?></td>
-			</tr>
-			<tr>
-				<th>Académico</th>
-				<td><?= $tutorando->fecha_nacimiento ?></td>
-			</tr>
-			<tr>
-				<th>Ecónomico</th>
-				<td><?= $tutorando->telefono_movil ?></td>
-			</tr>
-			<tr>
-				<th>Personal</th>
-				<td><?= $tutorando->email ?></td>
-			</tr>
-		</table>
+		</table><br>
+			<ul>
+				<li>RIESGO VOCACIONAL 3: Se ha detectado que la elección de la carrera no fue propia, sino que existen presiones familiares.</li>				
+			</ul>
+			<ul>	
+				<li>RIESGO ACADÉMICO 2: Se ha detectado que el alumno no posee hábito, disciplina o técnica de estudio.</li>
+				<li>RIESGO ACADÉMICO 3: Se ha detectado que el alumno no posee un grupo de estudio.</li>
+			</ul>
+			<ul>	
+				<li>RIESGO ECONÓMICO 1: Se ha detectado que el alumno tiene poco ingreso y depende de la beca para continuar sus estudios.</li>
+			</ul>
+			<ul>	
+				<li>RIESGO PERSONAL 1: Se ha detectado que el alumno tiene personas a cargo.</li>
+				<li>RIESGO PERSONAL 3: Se ha detectado que el alumno dedica más tiempo a otras actividades secundarias.</li>				
+			</ul>
+			<ul>	
+				<li>RIESGO INSTITUCIONAL 2: Se ha detectado que alumno tiene problemas con la conexión al WiFi.</li>
+			</ul>
 	</fieldset>
 	<div class="form-actions">
-		<input type="submit" name="save" class="btn btn-primary" value="<?php echo lang('entrevistas_action_create'); ?>"  />
-		<?php echo lang('bf_or'); ?>
-		<?php echo anchor(SITE_AREA .'/analisis/entrevistas', lang('entrevistas_cancel'), 'class="btn btn-warning"'); ?>
+		<input type="submit" name="save" class="btn btn-success" value="<< Ver anterior"  />
+		<input type="submit" name="save" class="btn btn-primary" value="Ver siguiente >>"  />
 	</div>
 	<?php echo form_close(); ?>
 </div>

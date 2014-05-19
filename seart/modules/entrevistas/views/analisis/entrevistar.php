@@ -25,14 +25,18 @@
 			</tr>
 			<tr>
 				<th>Telefono/s: </th>
-				<td><?= $tutorando[0]->telefono_movil ?></td>
+				<td><?= $tutorando[0]->telefono_movil ?></td>				
+			</tr>
+			<tr>
+				<th>Teléfono: </th>
+				<td><?= $tutorando->telefono_movil ?></td>
 			</tr>
 			<tr>
 				<th>E-mail</th>
 				<td><?= $tutorando[0]->email ?></td>
 			</tr>
 			<tr>
-				<th>DATOS ACADEMICOS</th>				
+				<th>DATOS ACADÉMICOS</th>				
 			</tr>
 			<tr>
 				<th>Carrera:</th>
@@ -48,7 +52,7 @@
 			</tr>
 			<tr>
 				<th>Orientacion del Titulo</th>
-				<td><?= $tutorando[0]->orientacion ?></td>
+				<td><?= $tutorando[0]->orientacion ?></td>				
 			</tr>
 		</table>
 	</fieldset>
@@ -81,6 +85,7 @@
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
 				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -139,7 +144,7 @@
 		} ?>		
 	</fieldset>
 	<div class="form-actions">
-		<input type="submit" name="save" class="btn btn-primary" value="Guarda Entrevista"  />
+		<input type="submit" name="save" class="btn btn-primary" value="Guardar Entrevista"  />
 		<?php echo lang('bf_or'); ?>
 		<?php echo anchor(SITE_AREA .'/analisis/entrevistas', lang('entrevistas_cancel'), 'class="btn btn-warning"'); ?>
 	</div>

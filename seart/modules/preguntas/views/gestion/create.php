@@ -28,11 +28,11 @@ $id = isset($preguntas['pregunta_id']) ? $preguntas['pregunta_id'] : '';
 			</div>
 
 			<?php // Change the values in this array to populate your dropdown as required
-				$factores = array( 1 => 'Vocacional', 2 => 'Academico', 3 => 'Economico', 4 => 'Personal');
+				$factores = array( 1 => 'Vocacional', 2 => 'Académico', 3 => 'Económico', 4 => 'Personal');
 				echo form_dropdown('preguntas_factor', $factores, set_value('preguntas_factor', isset($preguntas['factor']) ? $preguntas['factor'] : ''), 'Factor');
 			?>
 			<?php // Change the values in this array to populate your dropdown as required
-				$respuesta = array( 1 => 'Opcion única', 2 => 'Opcion múltiple');
+				$respuesta = array( 1 => 'Opción única', 2 => 'Opción múltiple');
 				echo form_dropdown('tipo_respuesta', $respuesta, set_value('tipo_respuesta', isset($preguntas['tipo_respuesta']) ? $preguntas['tipo_respuesta'] : ''), 'Tipo de respuesta');
 			?>
 			<div class="control-group">
