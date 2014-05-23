@@ -20,7 +20,7 @@
 		</table><br>
 			<ul>
 				<br><li>RIESGO VOCACIONAL</li>
-				<?php if (empty($resultados['vocacional'])) {
+				<div class="alert alert-block"><?php if (empty($resultados['vocacional'])) {
 					echo "No posee Riesgo vocacional";
 				} else {
 					echo 'Posee Riesgo Vocacional: ';
@@ -29,10 +29,10 @@
 						echo '<li>'.$value.'</li>';
 					}
 					echo '</ul>';
-				} ?>
-				<br><li>RIESGO ACADEMICO</li>
-				<?php if (empty($resultados['academico'])) {
-					echo "No posee Riesgo academico";
+				} ?></div>
+				<li>RIESGO ACADÉMICO</li>
+				<div class="alert alert-info"><?php if (empty($resultados['academico'])) {
+					echo "No posee Riesgo académico";
 				} else {
 					echo 'Posee Riesgo Acad&eacute;mico: ';
 					echo '<ul>';
@@ -40,10 +40,10 @@
 						echo '<li>'.$value.'</li>';
 					}
 					echo '</ul>';
-				} ?>
-				<br><li>RIESGO ECONOMICO</li>
-				<?php if (empty($resultados['economico'])) {
-					echo "No posee Riesgo economico";
+				} ?></div>
+				<li>RIESGO ECONÓMICO</li>
+				<div class="alert alert-block"><?php if (empty($resultados['economico'])) {
+					echo "No posee Riesgo económico";
 				} else {
 					echo 'Posee Riesgo Econ&oacute;mico: ';
 					echo '<ul>';
@@ -51,9 +51,9 @@
 						echo '<li>'.$value.'</li>';
 					}
 					echo '</ul>';
-				} ?>
-				<br><br><li>RIESGO PERSONAL</li>
-				<?php if (empty($resultados['personal'])) {
+				} ?></div>
+				<li>RIESGO PERSONAL</li>
+				<div class="alert alert-info"><?php if (empty($resultados['personal'])) {
 					echo "No posee Riesgo personal";
 				} else {
 					echo 'Posee Riesgo Personal: ';
@@ -62,12 +62,12 @@
 						echo '<li>'.$value.'</li>';
 					}
 					echo '</ul>';
-				} ?>
+				} ?></div>
 			</ul>						
 	</fieldset>
-	<div class="form-actions">
-		<input type="submit" name="save" class="btn btn-success" value="<< Ver anterior"  />
-		<input type="submit" name="save" class="btn btn-primary" value="Ver siguiente >>"  />
+	<div class="form-actions">		
+		<a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/riesgos/'.$tutor->id.'/'.$anterior; ?>" class="btn btn-success"> << Ver anterior</a>
+		<a href="<?php echo base_url().'index.php/admin/analisis/entrevistas/riesgos/'.$tutor->id.'/'.$siguiente; ?>" class="btn btn-primary">Ver siguiente >></a>
 	</div>
 	<?php echo form_close(); ?>
 </div>

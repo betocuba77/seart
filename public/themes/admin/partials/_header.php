@@ -19,7 +19,11 @@
 
 	<meta name="robots" content="noindex" />
 	<?php echo Assets::css(null, true); ?>
-
+	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+	
 	<script src="<?php echo Template::theme_url('js/modernizr-2.5.3.js'); ?>"></script>
 </head>
 <body class="desktop">

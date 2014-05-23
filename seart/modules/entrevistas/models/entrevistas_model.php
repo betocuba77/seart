@@ -176,4 +176,30 @@ class Entrevistas_model extends BF_Model {
 			return $row->descripcion;
 		}
 	}
+
+	public function anterior_siguiente($tutor, $tutorando, $cual){		
+		$this->db->order_by('entrevistas.entrevistado');
+		$query = $this->db->from('entrevistas')->where('entrevistador', $tutor)->get();
+		
+		foreach ($query->result() as $value) {
+			$tutorandos[] = $value->entrevistado;
+		}
+		foreach ($tutorandos as $key => $value) {
+			if ($value == $tutorando) {
+				if ($cual == 0) {
+					$return = @$tutorandos[--$key]; 
+				} elseif ($cual == 1) {
+					$return = @$tutorandos[++$key]; 
+				}
+				
+				//echo $return; exit;
+				if (!empty($return)) {
+					return $return;
+				} else {
+					return $value;
+				}
+
+			}
+		}
+	}
 }

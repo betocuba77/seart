@@ -96,6 +96,14 @@ class analisis extends Admin_Controller{
 		$this->load->model('users/user_model');
 		$this->load->model('tutorandos/tutorandos_model');
 
+		// Calculo de del anterior tutorando a mostgrar sus riesgos
+		//$anterior = $this->anterior($entrevistador, $entrevistado);
+
+		// Calculo de del sigueinte tutorando a mostgrar sus riesgos		
+		// 0 = anterior
+		// 1 = siguiente
+		Template::set('anterior', $this->entrevistas_model->anterior_siguiente($entrevistador, $entrevistado, 0));
+		Template::set('siguiente', $this->entrevistas_model->anterior_siguiente($entrevistador, $entrevistado, 1));
 		Template::set('resultados', $this->entrevistas_model->analisis_riesgos($entrevistado));
 		Template::set('tutor', $this->user_model->find($entrevistador));
 		Template::set('tutorando', $this->tutorandos_model->find($entrevistado));
@@ -106,7 +114,6 @@ class analisis extends Admin_Controller{
 	//--------------------------------------------------------------------
 	// !PRIVATE METHODS
 	//--------------------------------------------------------------------
-
 	/**
 	 * Summary
 	 *

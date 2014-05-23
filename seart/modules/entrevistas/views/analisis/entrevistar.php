@@ -64,7 +64,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -84,7 +84,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:50%"></textarea>
 
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
@@ -105,7 +105,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
@@ -125,7 +125,7 @@
 				//FACTOR 1				
 				// Si las respuestas son de opcion unica 
 				echo $pregunta['pdescripcion'].'<br>'; ?>
-				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:98%"></textarea>
+				<textarea name="r<?= $pregunta['pregunta_id']  ?>" style="width:50%"></textarea>
 				<?php if ($pregunta['tipo_respuesta'] == 1) {					
 					foreach ($pregunta['tipos_respuesta'] as $respuesta) { 
 						echo '<li>'.$respuesta->tdescripcion; ?>
