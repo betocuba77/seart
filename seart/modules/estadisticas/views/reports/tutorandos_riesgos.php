@@ -9,11 +9,17 @@
     <script type="text/javascript">
                 jQuery(document).ready(function($){
                     var data = [{
-                        label: "Realizadas",
-                        data: 45
+                        label: "Vocacional",
+                        data: 70
                     }, {
-                        label: "No realizadas",
-                        data: 55
+                        label: "Académico",
+                        data: 100
+                    }, {
+                        label: "Económico",
+                        data: 60
+                    }, {
+                        label: "Personal",
+                        data: 80
                     }];
                     var options = {
                         series: {

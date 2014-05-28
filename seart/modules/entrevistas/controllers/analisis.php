@@ -96,10 +96,6 @@ class analisis extends Admin_Controller{
 		$this->load->model('users/user_model');
 		$this->load->model('tutorandos/tutorandos_model');
 
-		// Calculo de del anterior tutorando a mostgrar sus riesgos
-		//$anterior = $this->anterior($entrevistador, $entrevistado);
-
-		// Calculo de del sigueinte tutorando a mostgrar sus riesgos		
 		// 0 = anterior
 		// 1 = siguiente
 		Template::set('anterior', $this->entrevistas_model->anterior_siguiente($entrevistador, $entrevistado, 0));
@@ -122,7 +118,7 @@ class analisis extends Admin_Controller{
 	 *
 	 * @return Mixed    An INT id for successful inserts, TRUE for successful updates, else FALSE
 	 */
-	private function save_entrevista($entrevistado){
+	private function save_entrevista($entrevistador, $entrevistado){
 		// Recorremos el array de respuestas seleccionadas
 		foreach ($this->input->post() as $value => $key)  {
 			// Se toma el primer caracter recibido, si es r entonces se evalua las respuestas
@@ -136,6 +132,7 @@ class analisis extends Admin_Controller{
 
 				//echo '<pre>'; print_r($crudo); echo '</pre>'; exit;
 				// Guardamos el resultado en la tabla respuestas
+
 				$this->entrevistas_model->insert_respuesta_crudo($crudo);
 
 				// recorremos el arreglo de las opciones de respuesta de cada respuesta
@@ -148,6 +145,8 @@ class analisis extends Admin_Controller{
 					// Guardamos en la tabla tipos_respuesta
 					$this->entrevistas_model->insert_respuesta_opciones($opciones);
 				}
+				
+				$this->entrevistas_model->entrevistado($entrevistado);
 				//echo '<pre>'; print_r($opciones); echo '</pre>'; exit;			
 
 			}			

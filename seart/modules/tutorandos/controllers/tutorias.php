@@ -66,9 +66,6 @@ class tutorias extends Admin_Controller{
 				show_404("tutorandos/index/$filter/");
 		}
 
-		$this->tutorandos_model->limit($this->limit, $offset)->where($where);
-		$records = $this->tutorandos_model->find_all();
-
 		// Deleting anything?
 		if (isset($_POST['delete'])){
 			// Recibiendo los registros a borrar
@@ -87,8 +84,9 @@ class tutorias extends Admin_Controller{
 				}
 			}
 		}
-
 		
+		$this->tutorandos_model->limit($this->limit, $offset)->where($where);
+		$records = $this->tutorandos_model->find_all();
 		// Paginacion
 		$this->load->library('pagination');
 		// Total de tutorandos

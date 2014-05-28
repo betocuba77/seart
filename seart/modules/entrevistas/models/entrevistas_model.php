@@ -54,7 +54,8 @@ class Entrevistas_model extends BF_Model {
 	public function insert_plantilla($data, $preguntas){
 
 		// Insertamos los datos de la plantilla
-		$id = $this->db->insert('plantillas',$data);
+		$this->db->insert('plantillas',$data);
+		$id = $this->db->insert_id();
 		if (is_array($preguntas)) {
 			foreach ($preguntas as $key => $value) {
 				$pregunta = array('pregunta_id' => $value, 'plantilla_id' => $id);				
@@ -202,4 +203,18 @@ class Entrevistas_model extends BF_Model {
 			}
 		}
 	}
+
+	public function delete_plantilla($id){
+
+		$this->db->delete('plantillas', array('plantilla_id' => $id));
+		$this->db->delete('plantilla_pregunta', array('plantilla_id' => $id));
+		return TRUE;
+	}
+
+	public function entrevistado($id){
+		$data = array('entrevistado' => 1);
+		$this->db->where('tutorando_id', $id);
+		$this->db->update('tutorandos', $data);
+	}
+
 }

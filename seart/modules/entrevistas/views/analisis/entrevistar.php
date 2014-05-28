@@ -18,23 +18,7 @@
 			<tr>
 				<th>Apellido y Nombre</th>
 				<td><?= $tutorando[0]->apellido.' '.$tutorando[0]->nombre ?></td>
-			</tr>
-			<tr>
-				<th>Edad</th>
-				<td><?= $tutorando[0]->fecha_nacimiento ?></td>
-			</tr>
-			<tr>
-				<th>Telefono Fijo: </th>
-				<td><?= $tutorando[0]->telefono_fijo ?></td>				
-			</tr>
-			<tr>
-				<th>Teléfono Movil: </th>
-				<td><?= $tutorando[0]->telefono_movil ?></td>
-			</tr>
-			<tr>
-				<th>E-mail</th>
-				<td><?= $tutorando[0]->email ?></td>
-			</tr>
+			</tr>			
 			<tr>
 				<th>DATOS ACADÉMICOS</th>				
 			</tr>

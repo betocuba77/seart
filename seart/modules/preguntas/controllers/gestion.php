@@ -56,7 +56,7 @@ class gestion extends Admin_Controller{
 		$records = $this->preguntas_model->find_all();
 
 		Template::set('records', $records);
-		Template::set('toolbar_title', 'Manage Preguntas');
+		Template::set('toolbar_title', 'Gestion de Preguntas');
 		Template::render();
 	}
 
@@ -161,6 +161,7 @@ class gestion extends Admin_Controller{
 		$data['descripcion']        = $this->input->post('preguntas_descripcion');
 		$data['factor']        = $this->input->post('preguntas_factor');
 		$data['tipo_respuesta'] = $this->input->post('tipo_respuesta');
+		$data['riesgo'] = rand(0,1);
 		$respuestas = $this->input->post('campo');
 		
 		if ($type == 'insert') {

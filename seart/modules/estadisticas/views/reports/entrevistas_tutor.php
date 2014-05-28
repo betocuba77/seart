@@ -8,12 +8,16 @@
 
     <script type="text/javascript">
                 jQuery(document).ready(function($){
-                    var data = [{
-                        label: "Realizadas",
-                        data: 45
+                    var data = [
+                    {
+                        label: "Mariela Condorí",
+                        data: 18
                     }, {
-                        label: "No realizadas",
-                        data: 55
+                        label: "Alberto Cuba",
+                        data: 20
+                    }, {
+                        label: "Carina Vargas",
+                        data: 27
                     }];
                     var options = {
                         series: {

@@ -171,7 +171,7 @@ class gestion extends Admin_Controller{
 
 		if ($type == 'insert'){
 			$id = $this->carreras_model->insert($data);
-			if (is_numeric($id)){
+			if ($id){
 				$return = $id;
 			} else {
 				$return = FALSE;

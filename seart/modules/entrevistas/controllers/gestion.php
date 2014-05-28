@@ -59,7 +59,7 @@ class gestion extends Admin_Controller{
 		$records = $this->entrevistas_model->find_all();
 
 		Template::set('records', $records);
-		Template::set('toolbar_title', 'Manage Entrevistas');
+		Template::set('toolbar_title', 'Gestión de Entrevistas');
 		Template::render();
 	}
 
@@ -77,7 +77,7 @@ class gestion extends Admin_Controller{
 			if (is_array($checked) && count($checked)){
 				$result = FALSE;
 				foreach ($checked as $pid){
-					$result = $this->entrevistas_model->delete($pid);
+					$result = $this->entrevistas_model->delete_plantilla($pid);
 				}
 
 				if ($result){

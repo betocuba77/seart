@@ -73,8 +73,9 @@ class Preguntas_model extends BF_Model {
 			foreach ($respuestas as $value) {
 				
 				$this->db->set('pregunta_id', $id);
-				$this->db->set('descripcion', $value);					
-				$this->db->insert('tipos_respuesta');				
+				$this->db->set('descripcion', $value);	
+				$this->db->set('riesgo', rand(0,1));				
+				$this->db->insert('tipos_pregunta');				
 			}			
 		}
 		return $id;

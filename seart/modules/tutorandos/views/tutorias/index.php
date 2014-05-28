@@ -41,7 +41,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<th>Nombres</th>					
 					<th>Tel&eacute;fono Movil</th>
 					<th>Correo Electr&oacute;nico</th>										
-					<th>Tutor</th>				
+					
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -74,7 +74,7 @@ $has_records	= isset($records) && is_array($records) && count($records);
 					<td><?php e($record->nombre) ?></td>										
 					<td><?php e($record->telefono_movil) ?></td>
 					<td><?php e($record->correo) ?></td>		
-					<td><?php echo anchor(SITE_AREA . '/settings/users/edit/' . $record->id,  $record->surname); ?></td>													
+					
 				</tr>
 				<?php
 					endforeach;

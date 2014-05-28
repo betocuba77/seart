@@ -9,11 +9,26 @@
     <script type="text/javascript">
                 jQuery(document).ready(function($){
                     var data = [{
-                        label: "Realizadas",
-                        data: 45
+                        label: "Microfono",
+                        data: 40
                     }, {
-                        label: "No realizadas",
-                        data: 55
+                        label: "Wifi",
+                        data: 20
+                    }, {
+                        label: "Dictado",
+                        data: 10
+                    }, {
+                        label: "Libros",
+                        data: 30
+                    }, {
+                        label: "Horarios",                    
+                        data: 10
+                    },  {
+                        label: "Tramites",
+                        data: 30
+                    }, {
+                        label: "Aulas",
+                        data: 30
                     }];
                     var options = {
                         series: {

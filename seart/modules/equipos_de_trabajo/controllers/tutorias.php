@@ -14,8 +14,7 @@ class tutorias extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->auth->restrict('Equipos_de_Trabajo.Tutorias.View');
@@ -35,8 +34,7 @@ class tutorias extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function index()
-	{
+	public function index(){
 
 		// Deleting anything?
 		if (isset($_POST['delete']))
@@ -65,7 +63,7 @@ class tutorias extends Admin_Controller
 		$records = $this->equipos_de_trabajo_model->find_all();
 
 		Template::set('records', $records);
-		Template::set('toolbar_title', 'Manage Equipos de Trabajo');
+		Template::set('toolbar_title', 'Gestión de Equipos de Trabajo');
 		Template::render();
 	}
 
